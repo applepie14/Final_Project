@@ -1,0 +1,41 @@
+/* Add here all your css styles (customizations) */
+
+.breadcrumbs-v1 {
+    padding: 100px 0;
+    position: relative;
+    background: url("https://i.ibb.co/8XdbP1F/Jeju-back3.jpg") center no-repeat;
+    background-size: 100% 250%;
+}
+
+
+.reviewlist {
+	margin : 10px auto;
+	float : none;
+}
+
+.reviewhead {
+    width: 98%;
+    padding: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.reviewhead1 {
+	display: block;
+    margin: 20px 10px 30px 10px;
+    width: auto;
+}
+
+.sky-form footer {
+    text-align: center;
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+ul.pull-right.breadcrumb.modify {
+    padding: 0px;
+}
