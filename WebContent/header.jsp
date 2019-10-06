@@ -32,6 +32,7 @@
                 <c:if test="${name != null && name !='관리자'}" >
                 	<!-- 일반유저 -->
                     <li>${name}님 </li>
+<c:if test="${activate == 'Y' }">
                     <li class="dropdown top">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                             My page
@@ -44,6 +45,10 @@
                          
                         </ul>
                     </li>
+</c:if>
+<c:if test="${activate == 'N' }">
+                    <li><a href="activate.do">이메일 인증</a></li>
+</c:if>
                     <li class="topbar-devider"></li>
                     <li><a href="logout.do">Logout</a></li>
                 </c:if>
@@ -63,14 +68,8 @@
             </div>
             <!-- End Topbar -->
 
-            <!-- Toggle get grouped for better mobile display -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#JEJU">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-bars"></span>
-            </button>
-            <!-- End Toggle -->
         </div><!--/end container-->
-
+<c:if test="${activate == 'Y' }">
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse" id="JEJU">
             <div class="container">
@@ -110,6 +109,14 @@
                 </ul>
             </div><!--/end container-->
         </div><!--/navbar-collapse-->
+        
+            <!-- Toggle get grouped for better mobile display -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#JEJU">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="fa fa-bars"></span>
+            </button>
+            <!-- End Toggle -->
+</c:if>
     </div>
     <!--=== End Header ===-->
    </div>

@@ -45,11 +45,12 @@
 </head>
 
 <body>
+<%@include file="../header.jsp" %>
 <div class="wrapper page-option-v1">
 
 		<!--=== Content Part ===-->
 		<div class="container content">
-			<div class="col-md-4 col-sm-6">
+			<div class="col-md-12 col-sm-12">
 				<div class="service-block service-block-grey">
 					<i class="icon-2x color-light fa fa-bell-o"></i>
 	                <c:if test="${name != null && name !='관리자'}" >
@@ -66,13 +67,14 @@
 					</c:if>
 	                <c:if test="${name == null}" >
 	                	<h2 class="heading-md">로그인을 해주세요</h2>
-					</c:if>			
+					</c:if>
 				</div>
 			</div>
 		</div>
 		<!--/container-->
 		<!--=== End Content Part ===-->
 
+<%@include file="../footer.jsp" %>
 </div><!--/wrapper-->
    
 <!-- JS Global Compulsory -->			

@@ -34,17 +34,12 @@ public class LoginProAction implements CommandAction {
 		if(name.equals("")) {
 			url= "/login/Login.jsp";
 		}else {
-			if(activate.equals("N")) {
-				url= "/Register/Activate.jsp";
-			}else{
-				session.setAttribute("email", email);
-				session.setAttribute("name", name);
-				session.setAttribute("activate", activate);
-				url= "/login/LoginPro.jsp";
-			}
+			session.setAttribute("email", email);
+			session.setAttribute("name", name);
+			session.setAttribute("activate", activate);
+			url= "/login/LoginPro.jsp";
 		}
 		
-		System.out.println(session.getAttribute(name));
 		return url;
 	}
 }

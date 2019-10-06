@@ -37,34 +37,13 @@ public class EmailSendAction implements CommandAction {
 			System.out.println(email);
 		}
 		
-		if(session.getAttribute("email") == null) {
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('로그인을 해주세요.');");
-			script.println("location.href = 'login.do'");
-			script.println("</script>");
-			script.close();
-			//출처: https://ndb796.tistory.com/40 [안경잡이개발자]
-			url = "login.do";
-		}
-		
 		String emailChecked = userDao.ActivateSelect(email)[1]; // user[1]은 Activate
 
-		if(emailChecked.equals("Y")) {
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('이미 인증 된 회원입니다.');");
-			script.println("location.href = 'index.jsp'");
-			script.println("</script>");
-			script.close();	
-			url = "main.do";
-		}
-		
 		// 사용자에게 보낼 메시지를 기입합니다.
-		String host = "http://localhost:8090/";
-		String from = "이메일 아이디";
+		String host = "http://106.10.39.121:8080/";
+		String from = "jeju131316@gmail.com";
 		String to = userDao.ActivateSelect(email)[0]; // user[0]은 email
-		String subject = "강의평가를 위한 이메일 확인 메일입니다.";
+		String subject = "회원가입에 대한 이메일 확인 메일입니다.";
 		String content = "다음 링크에 접속하여 이메일 확인을 진행하세요." +
 			"<a href='" + host + "Activate.do?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
 		// SMTP에 접속하기 위한 정보를 기입합니다.
@@ -96,14 +75,8 @@ public class EmailSendAction implements CommandAction {
 		    Transport.send(msg);
 		} catch(Exception e){
 		    e.printStackTrace();
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('Error');");
-			script.println("history.back();");
-			script.println("</script>");
-			script.close();	
-			url = "main.do";
 		}
+		
 		System.out.println(url);
 		return url;
 	}
