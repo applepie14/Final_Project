@@ -17,7 +17,7 @@
                             <i class="fa fa-home"></i>서울특별시 강남구 대현빌딩 3층<br />
                             <i class="fa fa-phone"></i>02)333-3333 <br />
                             <i class="fa fa-globe"></i>Website: <a href="#">www.htmlstream.com</a> <br />
-                            <i class="fa fa-envelope"></i>Email: <a href="mailto:info@anybiz.com">info@anybiz.com</a> 
+                            <i class="fa fa-envelope"></i>Email: <a href="mailto:info@anybiz.com">jeju131316@gamil.com</a> 
                         </address>
 
                         <!-- Social Links -->

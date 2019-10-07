@@ -265,7 +265,7 @@ public class UserDAO {
 			sql = "update user set Activate='Y' where user_Email=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_Email);
-			int i = pstmt.executeUpdate();
+			check = pstmt.executeUpdate();
 
 			conn.commit(); // update했기 때문에 Commit
 			
@@ -275,6 +275,58 @@ public class UserDAO {
 			pool.freeConnection(conn, pstmt);
 		}		
 		return check;
+	}
+	// 비밀번호 확인
+	public String passwordConfirm(String email) {
+		String check = "";
+
+		try {
+			conn = pool.getConnection();
+			sql = "SELECT User_Password FROM login " + 
+					"WHERE login.User_Email = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				check = rs.getString("User_Password");
+			}
+		} catch(Exception e) {
+			System.out.println("passwordConfirm() 메소드 에러발생" + e);
+		} finally {
+			pool.freeConnection(conn, pstmt,rs);
+		}		
+		return check;
+	}
+	
+	// user 비밀번호 변경
+	public int passwordUpdate(String table,String update_pwd, String user_Email) {
+		int check = 0; // user테이블에 비밀번호 변경 성공 유무
+		
+		try {
+			conn = pool.getConnection();
+			conn.setAutoCommit(false);
+			
+			// 2. SQL 처리
+			sql = "UPDATE " + table + " SET User_Password=? WHERE User_Email=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, update_pwd);
+			pstmt.setString(2, user_Email);
+			check = pstmt.executeUpdate();
+			
+			conn.commit(); // update했기 때문에 Commit
+			
+		} catch (Exception e) {
+			System.out.println("passwordUpdate() 메소드 에러발생" + e);
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}		
+		return check;
+	}
+	
+	// 비밀번호 임시 발급
+	public String passwordTemp(String table,String update_pwd, String user_Email) {
+		return "";
 	}
 	
 }

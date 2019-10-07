@@ -40,7 +40,7 @@
                         <ul class="dropdown-menu top">
 		                    <li><a href="mypage.do">My page</a></li>
 		                    <li><a href="mypage.do">My page</a></li>
-		                    <li><a href="mypage.do">My page</a></li>
+		                    <li><a href="passwordChange.do">변경</a></li>
                             <!-- End 마이페이지 -->
                          
                         </ul>
@@ -77,7 +77,7 @@
             <!-- End Toggle -->
 
         </div><!--/end container-->
-<c:if test="${activate == 'Y' }">
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse" id="JEJU">
             <div class="container">
@@ -117,7 +117,7 @@
                 </ul>
             </div><!--/end container-->
         </div><!--/navbar-collapse-->
-</c:if>
+
     </div>
     <!--=== End Header ===-->
    </div>

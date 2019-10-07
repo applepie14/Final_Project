@@ -47,6 +47,11 @@
 
 <body>    
 <%@include file="header.jsp" %>
+<c:if test="${activate == 'N' }">
+	<script>
+		location.href="activate.do";
+	</script>
+</c:if>
 <div class="wrapper page-option-v1">
 
     <!--=== Slider ===-->
