@@ -62,6 +62,7 @@
 	                		<c:when test="${activate == 'N'}">
 								<h2 class="heading-md">이메일을 확인해주세요</h2>
 								<p>이메일 인증이 완료되지 않았습니다.</p>
+								<a href="sendEmail.do" style="color:#fff;">인증메일 다시 보내기</a>
 	                		</c:when>
 	                	</c:choose>
 					</c:if>

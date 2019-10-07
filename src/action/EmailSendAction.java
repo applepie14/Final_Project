@@ -40,26 +40,24 @@ public class EmailSendAction implements CommandAction {
 		String emailChecked = userDao.ActivateSelect(email)[1]; // user[1]은 Activate
 
 		// 사용자에게 보낼 메시지를 기입합니다.
-		String host = "http://106.10.39.121:8080/";
+		String host = "localhost:8090/JEJU3/";
 		String from = "jeju131316@gmail.com";
 		String to = userDao.ActivateSelect(email)[0]; // user[0]은 email
-		String subject = "회원가입에 대한 이메일 확인 메일입니다.";
+		String subject = "회원가입에 대한 인증 메일입니다.";
 		String content = "다음 링크에 접속하여 이메일 확인을 진행하세요." +
-			"<a href='" + host + "Activate.do?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
+			"<br><a href='" + host + "activate.do?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
 		// SMTP에 접속하기 위한 정보를 기입합니다.
 
 		Properties p = new Properties();
-		p.put("mail.smtp.user", from);
 		p.put("mail.smtp.host", "smtp.googlemail.com");
 		p.put("mail.smtp.port", "465");
-		p.put("mail.smtp.starttls.enable", "true");
+		p.put("mail.smtp.user", from);
 		p.put("mail.smtp.auth", "true");
+		p.put("mail.smtp.starttls.enable", "true");
 		p.put("mail.smtp.debug", "true");
 		p.put("mail.smtp.socketFactory.port", "465");
 		p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		p.put("mail.smtp.socketFactory.fallback", "false");
-
-		 
 
 		try{
 		    Authenticator auth = new Gmail();
@@ -70,7 +68,7 @@ public class EmailSendAction implements CommandAction {
 		    Address fromAddr = new InternetAddress(from);
 		    msg.setFrom(fromAddr);
 		    Address toAddr = new InternetAddress(to);
-		    msg.addRecipient(Message.RecipientType.TO, toAddr);
+		    msg.setRecipient(Message.RecipientType.TO, toAddr);
 		    msg.setContent(content, "text/html;charset=UTF-8");
 		    Transport.send(msg);
 		} catch(Exception e){

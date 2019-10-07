@@ -67,6 +67,14 @@
                 </ul>
             </div>
             <!-- End Topbar -->
+            
+        
+            <!-- Toggle get grouped for better mobile display -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#JEJU">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="fa fa-bars"></span>
+            </button>
+            <!-- End Toggle -->
 
         </div><!--/end container-->
 <c:if test="${activate == 'Y' }">
@@ -109,13 +117,6 @@
                 </ul>
             </div><!--/end container-->
         </div><!--/navbar-collapse-->
-        
-            <!-- Toggle get grouped for better mobile display -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#JEJU">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-bars"></span>
-            </button>
-            <!-- End Toggle -->
 </c:if>
     </div>
     <!--=== End Header ===-->

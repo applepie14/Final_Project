@@ -48,14 +48,13 @@
 
 		<!--=== Content Part ===-->
 		<div class="container content">
-			<div class="col-md-4 col-sm-6">
-				<div class="service-block service-block-grey">
+			<div class="col-md-12 col-sm-12">
+				<div class="service-block service-block-orange">
 					<i class="icon-2x color-light fa fa-bell-o"></i>
 					<h2 class="heading-md">인증 이메일 전송</h2>
-					<p></p>
+					<p>가입 시 입력하신 이메일을 확인하여주세요</p>
 				</div>
 			</div>
-			<h1>가입 시 입력하신 이메일을 확인하여주세요</h1>
 		</div>
 		<!--/container-->
 		<!--=== End Content Part ===-->
