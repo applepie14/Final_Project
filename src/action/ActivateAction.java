@@ -35,7 +35,6 @@ public class ActivateAction implements CommandAction {
 			userDAO.ActivateUpdate(email);
 			session.setAttribute("activate", userDAO.ActivateSelect(email)[1]);
 			
-			url = "main.do";
 		}
 		
 		return url;

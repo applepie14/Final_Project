@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>로그인</title>
+	<title>비밀번호 찾기</title>
     <!-- Meta -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,10 +35,11 @@
     <link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings.css" type="text/css" media="screen" />
     <!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css" type="text/css" media="screen"><![endif]-->
 
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css" />
+    
     <!-- CSS Customization -->
     <link rel="stylesheet" href="assets/css/custom_register.css" />
-    <link rel="stylesheet" href="assets/css/theme-colors/orange.css" />
-    
     
 </head>
 
@@ -47,39 +48,29 @@
 <div class="wrapper page-option-v1">
 
     <!--=== Content Part ===-->
-    <div class="container content">		
-    	<div class="row">
-            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-                <form class="reg-page" method="post" action="loginPro.do">
-                    <div class="reg-header">            
-                        <h2 class="text-center">LOGIN</h2>
-                    </div>
-                    <div class="input-group margin-bottom-20">
-                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" name="user_email" placeholder="이메일" class="form-control" />
-                    </div>                    
-                    <div class="input-group margin-bottom-20">
-                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="password" name="user_password" placeholder="비밀번호" class="form-control" />
-                    </div>                    
-
-                    <div class="row">
-                        <div class="col-md-6 checkbox">
-                            <label><input type="checkbox" />로그인 정보 저장</label>                        
-                        </div>
-                        <div class="col-md-6">
-                            <button class="btn-u pull-right" type="submit">LOGIN</button>                        
-                        </div>
-                    </div>
-                </form>
-                    <hr />
-
-                    <a class="color-dark" href="#">이메일 찾기</a> | 
-                    <a class="color-dark" href="passwordTemp.do">비밀번호 찾기</a>
-                    <a class="color-green pull-right" href="registerform.do">회원가입</a>
-                    
-            </div>
-        </div><!--/row-->
+    <div class="container content">
+    
+    <c:if test="${info[0] != ''}">
+		<div class="col-md-12 col-sm-12">
+			<div class="service-block service-block-orange">
+				<i class="icon-custom icon-color-light rounded-x icon-line icon-fire"></i>
+					<h2 class="heading-md">임시 비밀번호 발급완료</h2>
+					<a style="color:#fff;" href="login.do">로그인</a>
+			</div>
+		</div>
+	</c:if>
+    <c:if test="${info[0] == ''}">
+		<div class="col-md-12 col-sm-12">
+			<div class="service-block service-block-light">
+				<i class="icon-custom icon-color-light rounded-x icon-line icon-fire"></i>
+					<h2 class="heading-md">정보가 없습니다. 입력하신 정보를 확인해주세요</h2>
+					<button class="btn btn-u" type="button" onclick="history.back()">뒤로가기</button>
+			</div>
+		</div>
+    </c:if>
+    
+    
+    
     </div><!--/container-->		
     <!--=== End Content Part ===-->
 
@@ -114,6 +105,7 @@
         FancyBox.initFancybox();
         OwlCarousel.initOwlCarousel();
         RevolutionSlider.initRSfullWidth();
+
     });
 </script>
 <!--[if lt IE 9]>

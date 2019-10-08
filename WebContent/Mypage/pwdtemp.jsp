@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>로그인</title>
+	<title>비밀번호 찾기</title>
     <!-- Meta -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,10 +35,11 @@
     <link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings.css" type="text/css" media="screen" />
     <!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css" type="text/css" media="screen"><![endif]-->
 
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css" />
+    
     <!-- CSS Customization -->
     <link rel="stylesheet" href="assets/css/custom_register.css" />
-    <link rel="stylesheet" href="assets/css/theme-colors/orange.css" />
-    
     
 </head>
 
@@ -47,39 +48,34 @@
 <div class="wrapper page-option-v1">
 
     <!--=== Content Part ===-->
-    <div class="container content">		
-    	<div class="row">
-            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-                <form class="reg-page" method="post" action="loginPro.do">
-                    <div class="reg-header">            
-                        <h2 class="text-center">LOGIN</h2>
-                    </div>
-                    <div class="input-group margin-bottom-20">
-                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" name="user_email" placeholder="이메일" class="form-control" />
-                    </div>                    
-                    <div class="input-group margin-bottom-20">
-                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="password" name="user_password" placeholder="비밀번호" class="form-control" />
-                    </div>                    
+    <div class="container content">
+			<form action="passwordTempPro.do" method="post" id="sky-form" class="sky-form">
+				<header class="text-center">임시 비밀번호 발급</header>
 
-                    <div class="row">
-                        <div class="col-md-6 checkbox">
-                            <label><input type="checkbox" />로그인 정보 저장</label>                        
-                        </div>
-                        <div class="col-md-6">
-                            <button class="btn-u pull-right" type="submit">LOGIN</button>                        
-                        </div>
-                    </div>
-                </form>
-                    <hr />
+				<fieldset>
+						<section>
+							<label class="label">이름</label>
+							<label class="input">
+								<i class="icon-append fa fa-lock"></i>
+								<input type="text"	name="name" />
+							</label>
+                            <div class="note error"></div>
+						</section>
+						
+						<section id="email">
+							<label class="label">이메일</label>
+							<label class="input">
+								<i class="icon-append fa fa-lock"></i>
+								<input type="text"	name="email"/>
+							</label>
+                            <div class="note error"></div>
+						</section>
 
-                    <a class="color-dark" href="#">이메일 찾기</a> | 
-                    <a class="color-dark" href="passwordTemp.do">비밀번호 찾기</a>
-                    <a class="color-green pull-right" href="registerform.do">회원가입</a>
-                    
-            </div>
-        </div><!--/row-->
+					</fieldset>
+				<footer class="text-center">
+				<button type="button" class="btn-u" onclick="submit()">확인</button>
+				</footer>
+			</form>
     </div><!--/container-->		
     <!--=== End Content Part ===-->
 
@@ -114,6 +110,30 @@
         FancyBox.initFancybox();
         OwlCarousel.initOwlCarousel();
         RevolutionSlider.initRSfullWidth();
+
+    	
+    	$("#new_password").keyup(function(){
+    		var regex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/; // 표현식
+    		if (!regex.test($("#new_password").val())) { // test 메소드 : 특정한 필드에 입력한 값에
+    														// 대한 유효성을 검사
+    			$('#pw .error').text("비밀번호는 문자, 숫자, 특수문자 포함 8자리 이상입니다.");
+    			$("#new_password").focus();
+    			return false;
+    		} else {
+    			$('#pw .error').text("");
+    			return true;
+    		}
+    	})
+    	
+    	$("#pwdConfirm").keyup(function(){
+        	if($("#new_password").val() != $("#pwdConfirm").val()){
+        		$('#pw-confirm .error').text("비밀번호가 일치하지 않습니다.")
+    			return false;
+    		} else {
+    			$('#pw-confirm .error').text("");
+    			return true;
+    		}
+    	})
     });
 </script>
 <!--[if lt IE 9]>

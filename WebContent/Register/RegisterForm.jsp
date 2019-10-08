@@ -262,6 +262,17 @@
     		error.text('');
     	})
     	
+    	$('#user_email').keyup(function(){
+        	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    	    if (regExp.test($("#user_email").val())){ 
+    	    	return true;
+    	    } else {
+    	    	$('#email .error').text("이메일 형식에 맞지 않습니다");
+    			$("#user_email").focus();
+    			return false;
+    	    }
+    	})
+    		
     	$("#user_password").keyup(function(){
     		var regex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/; // 표현식
     		if (!regex.test($("#user_password").val())) { // test 메소드 : 특정한 필드에 입력한 값에

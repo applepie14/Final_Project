@@ -70,8 +70,6 @@ public class UserDAO {
 				if(rs2.next()) {
 					name = "관리자";
 				}
-				boolean check = rs.next(); // 불러올 데이터가 존재하면 true, 없으면 false
-				System.out.println("로그인 성공");
 			} catch (Exception e) {
 				System.out.println("loginCheck() 호출 실패 : " + e);
 			} finally {
@@ -324,9 +322,39 @@ public class UserDAO {
 		return check;
 	}
 	
-	// 비밀번호 임시 발급
+	// 비밀번호 임시 발급 >> Action으로 바꿈
 	public String passwordTemp(String table,String update_pwd, String user_Email) {
 		return "";
+	}
+	
+	// 비밀번호 발급 시 확인할 정보
+	public String[] pwdTempInfo(String email, String name) {
+		String info[] = new String[3];
+		
+		try {
+			conn = pool.getConnection();
+			
+			sql = "SELECT user.User_Email, login.User_Email, user.User_Name " + 
+					"FROM user, login " + 
+					"WHERE user.User_Email = login.User_Email " + 
+					"AND user.User_Email = ? " + 
+					"AND user.User_Name = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email); //user.User_Email
+			pstmt.setString(2, name);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				info[0] = rs.getString("user.User_Email");
+				info[1] = rs.getString("login.User_Email");
+				info[2] = rs.getString("user.User_Name");
+			}
+		}catch(Exception e) {
+			System.out.println("비번 임시발급 확인 에러(pwdTempInfo)" + e);
+		}finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		return info;
 	}
 	
 }

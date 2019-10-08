@@ -15,7 +15,7 @@ public class PassWordChangeAction implements CommandAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8"); 
-		String url = "/Mypage/pwdchabge.jsp";
+		String url = "/Mypage/pwdchange.jsp";
 
 		HttpSession session = request.getSession(true);
 		String email = (String)session.getAttribute("email");
@@ -32,14 +32,14 @@ public class PassWordChangeAction implements CommandAction {
 						
 			if(check == 1) {
 				dao.passwordUpdate("user", new_password, email);
+				
+				session.invalidate();
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('비밀번호 변경이 되었습니다.새로운 비밀번호로 로그인하세요.');");
 				script.println("location.href='login.do';");
 				script.println("</script>");
 				script.close();
-				
-				session.invalidate();
 			}
 		}
 		

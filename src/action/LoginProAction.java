@@ -30,7 +30,6 @@ public class LoginProAction implements CommandAction {
 		System.out.println("name : " + name);
 		System.out.println("activate : " + activate);
 		
-
 		if(name.equals("")) {
 			url= "/login/Login.jsp";
 		}else {

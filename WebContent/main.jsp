@@ -303,6 +303,7 @@
 				$(data).find('item').each(function(index){
 					var divcls = ".insert-" + (index+1)
 					$(divcls+" img").attr('src', $(this).find('firstimage').text())
+					$(divcls+" img").attr('alt', $(this).find('title').text())
 					$(divcls+" .title a").text($(this).find('title').text())
 					$(divcls+" .pboby").text($(this).find('overview').text())
 					// div에 결합해서 화면에 출력
