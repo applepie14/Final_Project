@@ -56,7 +56,6 @@ public class PassWordTempProAction implements CommandAction {
 			check = userDao.passwordUpdate("login", ranPw, info[1]);
 			
 			// 사용자에게 보낼 메시지를 기입합니다.
-			String host = "localhost:8090/JEJU3/";
 			String from = "jeju131316@gmail.com";
 			String to = info[1]; // info[1]은 email
 			String subject = "그날, 우리의 제주 임시비밀번호 발급";

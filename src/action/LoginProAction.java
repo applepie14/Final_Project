@@ -11,7 +11,7 @@ public class LoginProAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		request.setCharacterEncoding("UTF-8");
-		String url = "";
+		String url = "/login/Login.jsp";
 		
 		HttpSession session = request.getSession(true);
 		
