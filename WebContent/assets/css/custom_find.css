@@ -159,7 +159,7 @@ input.searchbutton.btn-u {
 .modal-login .btn {
 	color: #fff;
 	border-radius: 4px;
-	background: #e67e22;
+	background: #fd9941;
 	text-decoration: none;
 	transition: all 0.4s;
 	line-height: normal;
@@ -167,7 +167,7 @@ input.searchbutton.btn-u {
 }
 
 .modal-login .btn:hover, .modal-login .btn:focus {
-	background: #d35400;
+	background: #ff851a;
 	outline: none;
 }
 
