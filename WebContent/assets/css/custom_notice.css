@@ -1,17 +1,20 @@
 /* Add here all your css styles (customizations) */
 
 /* 공지사항 css */
+th.notice-num,
+th.notice-date,
+td.find-num,
+td:nth-child(3) {
+	text-align: center;
+}
+
+
 .notice-container {
 	width: 800px;
 	margin: 50px auto;
 }
 
 
-@media (max-width: 768px) {
-	.notice-container {
-		width: 100%;
-	}
-}
 
 .clients-page {
 	margin-bottom: 5px;
@@ -64,13 +67,17 @@ margin-bottom:170px;
 }
 
 
+@media (max-width: 414px) {
+	.sky-form fieldset{
+		padding: 10px 10px 5px;
+	}
+}
 
-
-
-
-
-
-
+@media (max-width: 768px) {
+	.notice-container {
+		width: 100%;
+	}
+}
 
 
 

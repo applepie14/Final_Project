@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -77,13 +78,16 @@
 	
 	<!-- <div class="blog margin-bottom-40"> -->
            
-        	<h2>공지사항 제목입니다</h2>
+        	<h2>${article.notice_title}</h2>
             <div class="blog-post-tags">
                  <ul class="list-unstyled list-inline blog-info" >
                     <li><i class="fa fa-calendar"></i> September 02, 2019</li>   
+                    <li><i class="fa fa-comments-o"></i>조회수</li>
                 </ul>                    
             </div>
-            <p class="detail-p">공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용</p>
+            <p class="detail-p">공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 
+            내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 
+            내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용</p>
 		
 		
 		

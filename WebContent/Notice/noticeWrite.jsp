@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -60,7 +61,7 @@ margin-bottom: 50px;}
 
 <!-- 기본 페이지 이 아래로 합치면 됨 -->
 <!-- Contacts -->
-                <form action="#" method="post" id="sky-form3" class="sky-form">
+                <form action="noticeWritePro.do" method="post" id="sky-form3" class="sky-form">
 
                     <fieldset>                  
                       <div class="notice-container"> 
@@ -68,17 +69,17 @@ margin-bottom: 50px;}
                    
                         <section>
                             <label class="label">글제목</label>
-                            <label class="input">
+                            <label class="input" >
                               
-                                <input type="text" name="subject" id="subject">
+                                <input type="text" name="notice_title" id="subject" value="ㄱㄱㄱ"/>
                             </label>
                         </section>
                         
                         <section>
                             <label class="label">글내용</label>
-                            <label class="textarea">
+                            <label class="textarea" >
                               
-                                <textarea rows="4" name="message" id="message"></textarea>
+                                <textarea rows="4" name="notice_content" id="message"></textarea>
                             </label>
                         </section>
                         
