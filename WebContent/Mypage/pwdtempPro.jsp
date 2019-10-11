@@ -50,7 +50,7 @@
     <!--=== Content Part ===-->
     <div class="container content">
     
-    <c:if test="${info[0] != ''}">
+    <c:if test="${temp == true}">
 		<div class="col-md-12 col-sm-12">
 			<div class="service-block service-block-orange">
 				<i class="icon-custom icon-color-light rounded-x icon-line icon-fire"></i>
@@ -59,11 +59,11 @@
 			</div>
 		</div>
 	</c:if>
-    <c:if test="${info[0] == ''}">
+    <c:if test="${temp == false}">
 		<div class="col-md-12 col-sm-12">
 			<div class="service-block service-block-light">
 				<i class="icon-custom icon-color-light rounded-x icon-line icon-fire"></i>
-					<h2 class="heading-md">정보가 없습니다. 입력하신 정보를 확인해주세요</h2>
+					<h2 class="heading-md margin-bottom-20">정보가 없습니다. 입력하신 정보를 확인해주세요</h2>
 					<button class="btn btn-u" type="button" onclick="history.back()">뒤로가기</button>
 			</div>
 		</div>

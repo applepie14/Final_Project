@@ -33,7 +33,11 @@ public class PassWordTempProAction implements CommandAction {
 
 		String[] info = userDao.pwdTempInfo(email,name);		
 		
-		if(name != "" && email != "") {
+		// 둘 중 하나라도 값이 null이면 false, 둘 다 값이 있으면 true
+		boolean temp = (info[0]==null || info[1]==null)? false : true ;
+		request.setAttribute("temp", temp);
+		
+		if(temp == true) {
 			// user의 이메일과 login의 이메일이 같고 이름이 있다면
 			
 			// 임시 비밀번호 생성
@@ -41,7 +45,7 @@ public class PassWordTempProAction implements CommandAction {
                     '1','2','3','4','5','6','7','8','9','0',
                     'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
                     'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-                    '!','@','#','$','%','^','&','*','(',')'
+                    '!','@','#','$','%','^','&','*','(',')','~','-','_','+','=','?'
                     };//배열에 선언
 			String ranPw = ""; 
 			for (int i = 0; i < 10; i++) {
@@ -90,11 +94,9 @@ public class PassWordTempProAction implements CommandAction {
 			} catch(Exception e){
 			    e.printStackTrace();
 			}
-			request.setAttribute("check", check);
+			request.setAttribute("check", check);	
 		}
-		
 		
 		return "/Mypage/pwdtempPro.jsp";
 	}
-
 }
