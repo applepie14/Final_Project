@@ -381,4 +381,44 @@ public class UserDAO {
 		return email;
 	}
 	
+	// 회원 정보 불러오기
+	public UserDTO loadInfo(String email) {
+		UserDTO user = null;
+		try {
+			conn = pool.getConnection();
+			
+			sql =	"SELECT User_Name,User_Email,User_Gender,User_Birth,User_Nickname,User_Phone,User_Intro " + 
+					"FROM user " + 
+					"WHERE user.User_Email = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new UserDTO();
+				System.out.println(rs.getString("User_Name"));
+				System.out.println(rs.getString("User_Email"));
+				System.out.println(rs.getString("User_Gender"));
+				System.out.println(rs.getString("User_Birth"));
+				System.out.println(rs.getString("User_Nickname"));
+				System.out.println(rs.getString("User_Phone"));
+				System.out.println(rs.getString("User_Intro"));
+								
+				user.setUser_name(rs.getString("User_Name"));
+				user.setUser_email(rs.getString("User_Email"));
+				user.setUser_gender(rs.getString("User_Gender"));
+				user.setUser_birth(rs.getString("User_Birth"));
+				user.setUser_nickname(rs.getString("User_Nickname"));
+				user.setUser_phone(rs.getString("User_Phone"));
+				user.setUser_intro(rs.getString("User_Intro"));
+			}
+		} catch (Exception e) {
+			System.out.println("loadInfo() 메소드 에러발생" + e);
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		return user;
+	}
+	
 }
