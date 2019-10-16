@@ -53,8 +53,8 @@
     <c:if test="${temp == true}">
 		<div class="col-md-12 col-sm-12">
 			<div class="service-block service-block-orange">
-				<i class="icon-custom icon-color-light rounded-x icon-line icon-fire"></i>
-					<h2 class="heading-md">임시 비밀번호 발급완료</h2>
+				<i class="icon-custom icon-color-light rounded-x icon-line icon-envelope-open"></i>
+					<h2 class="heading-md">임시 비밀번호 발급완료. 이메일을 확인해주세요.</h2>
 					<a style="color:#fff;" href="login.do">로그인</a>
 			</div>
 		</div>
@@ -62,8 +62,8 @@
     <c:if test="${temp == false}">
 		<div class="col-md-12 col-sm-12">
 			<div class="service-block service-block-light">
-				<i class="icon-custom icon-color-light rounded-x icon-line icon-fire"></i>
-					<h2 class="heading-md margin-bottom-20">정보가 없습니다. 입력하신 정보를 확인해주세요</h2>
+				<i class="icon-custom icon-color-dark rounded-x icon-line icon-ghost"></i>
+					<h2 class="heading-md margin-bottom-20">정보가 없습니다. 입력하신 정보를 확인해주세요.</h2>
 					<button class="btn btn-u" type="button" onclick="history.back()">뒤로가기</button>
 			</div>
 		</div>
