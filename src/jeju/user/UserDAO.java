@@ -322,11 +322,6 @@ public class UserDAO {
 		return check;
 	}
 	
-	// 비밀번호 임시 발급 >> Action으로 바꿈
-	public String passwordTemp(String table,String update_pwd, String user_Email) {
-		return "";
-	}
-	
 	// 비밀번호 발급 시 확인할 정보
 	public String[] pwdTempInfo(String email, String name) {
 		String info[] = new String[3];
@@ -355,6 +350,35 @@ public class UserDAO {
 			pool.freeConnection(conn, pstmt, rs);
 		}
 		return info;
+	}
+	
+	// 이메일찾기(이름이랑 전화번호로 찾기)
+	public String idFind(String user_Name, String user_Phone) {
+		String email=""; // 로그인 테이블에 값 넣기 성공 유무
+		
+		try {
+			conn = pool.getConnection();
+			
+			sql = "SELECT user.User_Email, login.User_Email FROM user, login " + 
+					"where user.User_Email = login.User_Email " + 
+					"And user.user_name=? " + 
+					"And user.user_phone=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_Name);
+			pstmt.setString(2, user_Phone);
+
+			rs = pstmt.executeQuery();
+			
+			if(rs.next() && rs.getString("user.User_Email").contentEquals(rs.getString("login.User_Email"))) {
+				System.out.println(rs.getString("user.User_Email").contentEquals(rs.getString("login.User_Email")));
+				email = rs.getString("user.User_Email");
+			}
+		} catch (Exception e) {
+			System.out.println("idFind() 메소드 에러발생" + e);
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}		
+		return email;
 	}
 	
 }
