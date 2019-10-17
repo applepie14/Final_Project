@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css" />
     
     <!-- CSS Customization -->
-    <link rel="stylesheet" href="assets/css/custom_register.css" />
+    <link rel="stylesheet" href="assets/css/custom_info.css" />
     
     
 </head>
@@ -48,49 +48,45 @@
 <%@include file="../header.jsp" %>
 <div class="wrapper page-option-v1">
 		<div class="container reg">
-			<form action="registerPro.do" method="post" id="sky-form" class="sky-form">
-				<header>회원가입</header>
+			<form action="infoUpdatePro.do" method="post" id="sky-form" class="sky-form">
+				<header>회원 정보 수정</header>
 
-				<fieldset>
-					
+				<fieldset>					
 						<section id="name">
 							<label class="label">이름</label>
 							<label class="input">
 								<i class="icon-append fa fa-user"></i>
-								<input type="text" name="user_name" id="user_name" />
+								<input type="text" name="user_name" id="user_name" value="${user.getUser_name()}" readonly="readonly"/>
 							</label>
-                            <div class="note error"></div>
 						</section>
 						
 						<section id="email">
 							<label class="label">이메일</label>
-                            <label for="user_email" class="input input-file">
+							<label class="input">
 								<i class="icon-append fa fa-envelope"></i>
-								<input type="text" name="user_email" id="user_email" />
-                                <div class="button" onclick="emailCheck()" id="emailbtn">중복확인</div>
-								<input type = "hidden" name="idDuplication" value="idUncheck" />
-                            </label>
-                            <div class="note error"></div>
+								<input type="text" name="user_email" id="user_email" value="${user.getUser_email()}" readonly="readonly"/>
+							</label>
 						</section>
 						
 						<section id="gender">
 							<label class="label">성별</label>
-							<label class="select">
-								<select name="user_gender" id="user_gender">
-									<option value="N" selected readonly>성별</option>
-									<option value="F">여자</option>
-									<option value="M">남자</option>
-								</select>
-								<i></i>
+							<label class="input">
+								<i class="icon-append fa fa-user"></i>
+								<c:if test="${user.getUser_gender() == 'F'}">
+									<c:set value="여자" var="gender" />
+								</c:if>
+								<c:if test="${user.getUser_gender() == 'M'}">
+									<c:set value="남자" var="gender" />
+								</c:if>
+								<input type="text" name="user_gender" id="user_gender" value="${gender}" readonly="readonly"/>
 							</label>
-                            <div class="note error"></div>
 						</section>
 						
 						<section id="birth">						
 							<label class="label">생년월일</label>
                             <label class="input">
                             <i class="icon-append fa fa-calendar"></i>
-                            <input type="text" name="user_birth" id="date" />
+                            <input type="text" name="user_birth" id="date" value="${user.getUser_birth()}"/>
                             </label>
                             <div class="note error"></div>
 						</section>
@@ -98,20 +94,17 @@
 
 						<section id="nickname">
 							<label class="label">별명</label>
-                            <label for="file" class="input input-file">
+							<label class="input">
 								<i class="icon-append fa fa-user"></i>
-								<input type="text" name="user_nickname" id="user_nickname"/>
-                                <div class="button" onclick="nickCheck();" id="nickbtn">중복확인</div>
-								<input type = "hidden" name="nickDuplication" value="idUncheck" />
-                            </label>
-                            <div class="note error"></div>
+								<input type="text" name="user_nickname" id="user_nickname" value="${user.getUser_nickname()}" readonly="readonly"/>
+							</label>
 						</section>
 						
 						<section id="phone">
 							<label class="label">전화번호</label>
 							<label class="input">
 								<i class="icon-append fa fa-mobile"></i>
-								<input type="text" name="user_phone" id="user_phone" />
+								<input type="text" name="user_phone" id="user_phone" value="${user.getUser_phone()}" />
 							</label>
                             <div class="note error"></div>
 						</section>
@@ -119,14 +112,15 @@
 						<section id="intro">
 							<label class="label">자기소개</label>
 							<label class="textarea">
-								<textarea name="user_intro" id="user_intro"></textarea>
+								<textarea name="user_intro" id="user_intro">${user.getUser_intro()}</textarea>
 							</label>
                             <div class="note error"></div>
 						</section>
 				</fieldset>
 				
 				<footer class="text-center">
-				<button type="button" class="btn-u" onclick="registerCheck()">정보 수정</button>
+				<button type="button" class="btn-u" onclick="updateCheck()">정보 수정</button>
+				<button type="button" class="btn-u btn-brd" onclick="location.href='mypage.do'">취소</button>
 				</footer>
 			</form>
 
@@ -140,7 +134,6 @@
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- JS Implementing Plugins -->
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
-<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
 <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
 <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
 <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
@@ -152,7 +145,6 @@
 <script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
 <script type="text/javascript" src="assets/js/plugins/validation.js"></script>
 <script type="text/javascript" src="assets/js/forms/registerCheck.js"></script>
-<script type="text/javascript" src="assets/js/forms/ducheck.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
@@ -165,17 +157,29 @@
     		error.text('');
     	})
     	
-    	$('#user_email').keyup(function(){
-        	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    	    if (regExp.test($("#user_email").val())){ 
-    	    	return true;
-    	    } else {
-    	    	$('#email .error').text("이메일 형식에 맞지 않습니다");
-    			$("#user_email").focus();
-    			return false;
-    	    }
-    	})
 	});
+    function updateCheck(){
+		var error = $('.error').text('');
+		if($("#date").val() == "") {
+			$('#birth .error').text("생년월일을 입력하세요")
+			$("#date").focus();
+			if($('.ui-datepicker-calendar a').click(function(){
+				$('#birth .error').text("")
+			}))
+			return false;
+		}
+		if($("#user_phone").val() == "") {
+			$('#phone .error').text("전화번호를 입력하세요")
+			$("#user_phone").focus();
+			return false;
+		}
+		if($("#user_intro").val() == "") {
+			$('#intro .error').text("자기소개를 입력하세요")
+			$("#user_intro").focus();
+			return false;
+		}
+		$('#sky-form').submit();
+	}
     
 </script>
 <!--[if lt IE 9]>

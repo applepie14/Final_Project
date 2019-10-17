@@ -397,14 +397,6 @@ public class UserDAO {
 			
 			if(rs.next()) {
 				user = new UserDTO();
-				System.out.println(rs.getString("User_Name"));
-				System.out.println(rs.getString("User_Email"));
-				System.out.println(rs.getString("User_Gender"));
-				System.out.println(rs.getString("User_Birth"));
-				System.out.println(rs.getString("User_Nickname"));
-				System.out.println(rs.getString("User_Phone"));
-				System.out.println(rs.getString("User_Intro"));
-								
 				user.setUser_name(rs.getString("User_Name"));
 				user.setUser_email(rs.getString("User_Email"));
 				user.setUser_gender(rs.getString("User_Gender"));
@@ -419,6 +411,31 @@ public class UserDAO {
 			pool.freeConnection(conn, pstmt);
 		}
 		return user;
+	}
+
+	// 회원 정보 수정하기
+	public int updateInfo(String phone, String birth, String intro, String email) {
+		int update = 0;
+
+		try {
+			conn = pool.getConnection();
+			sql =	"UPDATE user " + 
+					"SET User_Phone=? , User_Birth=? , User_Intro=? " + 
+					"WHERE User_Email=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, phone);
+			pstmt.setString(2, birth);
+			pstmt.setString(3, intro);
+			pstmt.setString(4, email);
+
+			update = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("updateInfo() 메소드 에러발생" + e);
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		return update;
 	}
 	
 }

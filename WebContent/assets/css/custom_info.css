@@ -1,0 +1,158 @@
+/* Add here all your css styles (customizations) */
+.container.reg {
+    margin: 30px auto;
+}
+
+.sky-form {
+    border: none;
+    box-shadow: none;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.sky-form header {
+    background: #fff;
+    font-weight: 900;
+}
+
+.sky-form header {
+    background: #fff;
+}
+.text-green {
+	color : green;
+}
+
+.sky-form .icon-append {
+    left: 5px;
+    padding-right: 3px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    right: 0;
+    padding-left: 0;
+    border-left-width: 0;
+    border-left-style: none;
+}
+
+.sky-form .input .icon-append + input, .sky-form .textarea .icon-append + textarea {
+    padding-left: 46px;
+    padding-right: 0;
+}
+
+a.ui-datepicker-prev.ui-corner-all,
+a.ui-datepicker-next.ui-corner-all {
+    margin-top: 15px;
+}
+
+a.accordion-toggle {
+    color: #aaa;
+}
+
+label.checkbox span {
+	color:#e67e22;
+	font-size: 12px;
+    line-height: 22px;
+}
+.sky-form .radio, .sky-form .checkbox {
+    padding-left: 20px;
+}
+
+.panel-body {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+label.checkbox.terms {
+    margin-bottom: 20px;
+}
+.sky-form footer {
+    display: block;
+    padding: 30px 30px 25px;
+    margin-top:20px;
+    border-top: 1px solid rgba(0,0,0,.1);
+    background: #fff;
+}
+
+.sky-form .input input#user_name,
+.sky-form .input input#user_email,
+.sky-form .input input#user_gender,
+.sky-form .input input#user_nickname,
+
+.sky-form .input input#user_name:hover,
+.sky-form .input input#user_email:hover,
+.sky-form .input input#user_gender:hover,
+.sky-form .input input#user_nickname:hover,
+
+.sky-form .input input#user_name:focus,
+.sky-form .input input#user_email:focus,
+.sky-form .input input#user_gender:focus,
+.sky-form .input input#user_nickname:focus {
+	border-color: rgba(255,255,255,0);
+}
+
+/* =====-- datepicker에 옵션 스타일 --===== */
+/* 오늘날짜 선택 버튼 기본 */
+button.ui-datepicker-current.ui-state-default.ui-priority-secondary.ui-corner-all,
+button.ui-datepicker-close.ui-state-default.ui-priority-primary.ui-corner-all {
+    float: left;
+    background: #fff;
+    border: 1px solid #e67e22;
+    color:#e67e22;
+    padding: 3px 10px;
+    margin-top: 10px;
+}
+/* 오늘날짜 선택 버튼 hover */
+button.ui-datepicker-current.ui-state-default.ui-priority-secondary.ui-corner-all:hover,
+button.ui-datepicker-close.ui-state-default.ui-priority-primary.ui-corner-all:hover  {
+    background: #e67e22;
+    border: 1px solid #e67e22;
+    color:#fff;
+}
+/* 닫기 버튼 기본 */
+button.ui-datepicker-close.ui-state-default.ui-priority-primary.ui-corner-all {
+    float: right;
+}
+
+a.ui-state-default.ui-state-highlight {
+    color: #000;
+    font-size: 15px;
+    background: #ddd;
+}
+
+.error {
+	color: red!important;
+}
+.sky-form .checkbox input + i:after {
+    top: -4px;
+    left: -3px;
+}
+/* =====-- datepicker에 옵션 스타일 --===== */
+@media (max-width: 623px) {
+	.sky-form {
+	    margin: 0;
+		width: 100%;
+	
+	}
+	.sky-form header,
+	.sky-form fieldset {
+	    width: 100%;
+	    padding: 25px 0 5px;
+	    margin: 0;
+	}
+}
+@media (min-width: 768px) {
+	.sky-form {
+	    width: 90%;
+	    margin: 0 auto;
+	}
+}
+@media (min-width: 992px) {
+	.sky-form {
+	    width: 80%;
+	    margin: 0 auto;
+	}
+}
+@media (min-width: 1200px) {
+	.sky-form {
+	    width: 50%;
+	    margin: 0 auto;
+	}
+}
