@@ -64,6 +64,12 @@ form.search{
 	text-align : center;
 }
 
+input.searchbutton.btn-u {
+    vertical-align: middle;
+    height: 25px;
+    padding-top : 2px;
+}
+
 </style>
 </head>
 <body>
@@ -120,9 +126,9 @@ form.search{
 	<c:set var="number" value="${number-1 }" />
 	</td>
    
-     
-       
-        <td><a href="noticeDetail.do?num=${article.num}"><c:out value="${notice.notice_title}"/></a></td>
+
+<%--         <td><a href="noticeDetail.do?num=${article.num}"><c:out value="${notice.notice_title}"/></a></td> --%>
+        <td><a href="noticeDetail.do?notice_no=${notice.notice_no}"><c:out value="${notice.notice_title}"/></a></td>
   
         <%-- 	<c:out value="${number}"/>
  --%>      		<%-- <c:set var="number" value="${number-1 }"/> --%>
@@ -150,7 +156,7 @@ form.search{
 	</select>
 	&nbsp;
 	<input type="text" size="15" name="searchtext" placeholder="&nbsp;검색어를 입력하세요" style="width :300px" >&nbsp;
-	<input type="submit" value="검색">
+    <input class="searchbutton btn-u" type="submit" value="검색">
 </form><p>
         
 

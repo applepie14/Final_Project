@@ -2,13 +2,10 @@ package jeju.notice;
 import java.sql.*;
 import java.util.*; // 자료구조 Collection(Vector, ArrayList 등)
 import java.util.Date;
-
 import controller.DBConnectionMgr;
 import jeju.user.UserDTO;
-
-
-import java.text.SimpleDateFormat;
 import jeju.notice.NoticeDTO;
+import java.text.SimpleDateFormat;
 
 public class NoticeDAO {
 
@@ -203,7 +200,7 @@ public List getNoticeArticles(int start, int end, String search, String searchte
 ////추가3//////////////////////////////////////////////////////////////
 //페이징 처리를 재조정해주는 메서드작성(ListAction 클래스에서 불러오기)
 //1.화면에 보여주는 페이지 번호 2.화면에 출력할 레코드갯수
-public Hashtable pageList(String page,int count) {
+ public Hashtable pageList(String page,int count) {
 		
 	// 1. ListAction.java 소스코드를 BoardDAO로 이동
     // ListAction에서의 복잡한 페이징처리를 대신 처리
@@ -262,14 +259,14 @@ public Hashtable pageList(String page,int count) {
 
 //--중복된 레코드 한개를 담을 수 있는 메서드를 따로 만들어서 처리-------
 private NoticeDTO makeNoticeFromResult() throws Exception{
-	NoticeDTO notice=new NoticeDTO();
-	notice.setNotice_no(rs.getInt("notice_no"));
-	notice.setNotice_title(rs.getString("notice_title"));
-	notice.setNotice_content(rs.getString("notice_content"));
-	notice.setNotice_count(rs.getInt("notice_count"));
-	notice.setNotice_date(rs.getTimestamp("notice_date"));
-	notice.setAdmin_id(rs.getString("admin_id"));
-	return notice ;
+	NoticeDTO article=new NoticeDTO();
+	article.setNotice_no(rs.getInt("notice_no"));
+	article.setNotice_title(rs.getString("notice_title"));
+	article.setNotice_content(rs.getString("notice_content"));
+	article.setNotice_count(rs.getInt("notice_count"));
+	article.setNotice_date(rs.getTimestamp("notice_date"));
+	article.setAdmin_id(rs.getString("admin_id"));
+	return article ;
 }
 
 //----------게시판의 글쓰기 및 글 답변달기-----------------------------
@@ -277,8 +274,8 @@ public void insertArticle(NoticeDTO article) { //~(MemberDTO mem)
 	
 
 	//테이블에 입력할 게시물 번호를 저장할 변수
-	//int num=article.getNotice_no();
-	int number=0;
+		/* int num=article.getNotice_no(); */
+		int number=0; 
 	try {
 		conn=pool.getConnection();
 		sql="select max(Notice_No) from Notice"; //최대값+1=실제 저장할 게시물번호
@@ -286,7 +283,7 @@ public void insertArticle(NoticeDTO article) { //~(MemberDTO mem)
 		rs=pstmt.executeQuery();
 		if(rs.next()) {//현재 테이블에서 데이터가 한개라도 존재한다면
 			number=rs.getInt(1)+1;
-		}else { //맨 처음에 레코드가 한개라도 없다면 무조건 ber=1
+		}else { //맨 처음에 레코드가 한개라도 없다면 무조건 number=1
 			number=1;
 		}
 		
@@ -309,22 +306,27 @@ public void insertArticle(NoticeDTO article) { //~(MemberDTO mem)
 }
 //글상세보기->list.jsp
 	
-	public NoticeDTO getArticle(int num) {
+	public NoticeDTO getArticle(int notice_no) {
 		
 		NoticeDTO article=null;
 		
 		try {
+			
 			conn=pool.getConnection();
 			sql="update Notice set Notice_Count=Notice_Count+1 where Notice_No=?";
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
+			pstmt.setInt(1, notice_no);
 			int update=pstmt.executeUpdate();
+			 
 			System.out.println("조회수 증가유무(update)=>"+update);
 			
 			sql="select * from Notice where Notice_No=?";
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
+			pstmt.setInt(1, notice_no);
 			rs=pstmt.executeQuery();
+			
+			System.out.println("notice_no의 값 => "+notice_no);
+			System.out.println("getArticle()의 sql => "+sql);
 			
 			if(rs.next()) {//레코드가 존재한다면
 				article=makeNoticeFromResult();
@@ -337,46 +339,134 @@ public void insertArticle(NoticeDTO article) { //~(MemberDTO mem)
 		}
 		return article;
 	}
+	
+	
+	//-----------중복된 레코드 한개를 담을 수 있는 메서드를 따로 만들어서 처리------------	
+		private NoticeDTO makeArticleFromResult() throws Exception {
+			NoticeDTO article=new NoticeDTO();
+			article.setNotice_no(rs.getInt("setNotice_no"));
+			article.setNotice_title(rs.getString("notice_title"));
+			article.setNotice_content(rs.getString("notice_content"));
+			article.setNotice_count(rs.getInt("notice_count"));
+			article.setNotice_date(rs.getTimestamp("notice_date"));
+			article.setAdmin_id(rs.getString("admin_id"));//default->0
+			return article;
+		}
+	//-----------------------------------------------------------------------------
+ //,글수정,
+ //1)수정할 데이터를 찾을 메서드 필요=>select * from board where num=? =>조회수를 증가X
+ public NoticeDTO updateGetArticle(int num) {
+	NoticeDTO article=null;//ArrayList articleList=null;
+	try {
+		conn=pool.getConnection();
+	  
+		sql="select * from Notice where notice_no=?";//1,10
+		pstmt=conn.prepareStatement(sql);
+		pstmt.setInt(1, num);
+		rs=pstmt.executeQuery();
+		//글목록보기
+		if(rs.next()) {//레코드가 최소 만족 1개이상 존재한다면
+			   article=makeNoticeFromResult();
+			   /*
+			    article=new BoardDTO();//MemberDTO~
+				article.setNum(rs.getInt("num"));
+				article.setWriter(rs.getString("writer"));
+				article.setEmail(rs.getString("email"));
+				article.setSubject(rs.getString("subject"));
+				article.setPasswd(rs.getString("passwd"));
+				article.setReg_date(rs.getTimestamp("reg_date"));//오늘날짜->코딩 ->now()
+				article.setReadcount(rs.getInt("readcount"));//default->0
+				article.setRef(rs.getInt("ref"));//그룹번호->신규글과 답변글 묶어주는 역할
+				article.setRe_step(rs.getInt("re_step"));//답변글이 나오는 순서(0,1,2,3,,오름차순)
+				article.setRe_level(rs.getInt("re_level"));//들여쓰기(답변의 깊이)
+				article.setContent(rs.getString("content"));//글내용
+				article.setIp(rs.getString("ip"));//글쓴이의 ip주소
+				*/
+		}
+	}catch(Exception e) {
+		System.out.println("updateGetArticle() 메서드 에러유발"+e);
+	}finally {
+		pool.freeConnection(conn,pstmt,rs);
+	}
+	return article;
+}
+
+ // 공지 수정
+public int updateArticle(String title, String content, int notice_no) { //~(MemberDTO mem)
+	//테이블에 입력할 게시물 번호를 저장할 변수
+		/* int num=article.getNotice_no(); */
+		int update=0; 
+	try {
+		conn=pool.getConnection();
+		//12개->,reg_date,reacount(생략)->default->sysdate,now()<-mysql (?대신에)
+		sql="UPDATE Notice " + 
+				"SET Notice_Title=? " + 
+				", Notice_Content=? " +
+				"WHERE Notice_No=?";
+		pstmt=conn.prepareStatement(sql);
+		
+		pstmt.setString(1, title);
+		pstmt.setString(2, content);
+		pstmt.setInt(3, notice_no);
+		
+		update=pstmt.executeUpdate();
+		
+		System.out.println("공지 수정 성공유무(update)=>"+update);
+	}catch(Exception e) {
+		System.out.println("updateArticle()메서드 에러유발=>"+e);
+	}finally {
+		pool.freeConnection(conn, pstmt,rs);
+	}//finally
+	return update;
+}
 
 
+public NoticeDTO deleteGetArticle(int num) {
+	NoticeDTO article=null;//ArrayList articleList=null;
+	try {
+		conn=pool.getConnection();
+	  
+		sql="select * from Notice where notice_no=?";//1,10
+		pstmt=conn.prepareStatement(sql);
+		pstmt.setInt(1, num);
+		rs=pstmt.executeQuery();
+		//글목록보기
+		if(rs.next()) {//레코드가 최소 만족 1개이상 존재한다면
+			   article=makeNoticeFromResult();
 
+		}
+	}catch(Exception e) {
+		System.out.println("deleteGetArticle() 메서드 에러유발"+e);
+	}finally {
+		pool.freeConnection(conn,pstmt,rs);
+	}
+	return article;
+}
+
+
+//글 삭제시켜주는 메서드
+public int deleteArticle(int notice_no) {
+	
+	 int delete = 0;//게시물의 삭제성공유무 
+	 try {
+	            conn=pool.getConnection();
+	    		 sql="delete from Notice where Notice_No=?";
+	    		 pstmt=conn.prepareStatement(sql);
+	    		 pstmt.setInt(1, notice_no);
+	    		 delete=pstmt.executeUpdate();
+	    		 System.out.println("게시판의 글삭제 성공유무(delete)="+delete);//1성공
+	    		 
+	 }catch(Exception e) {
+		 System.out.println("deleteArticle()메서드 에러유발=>"+e);
+	 }finally {
+		pool.freeConnection(conn, pstmt, rs); //암호를 찾기 때문에
+	 }
+	 return delete;
+}
 
 	
-
-
 }
 	
 
 	
 	
-	
-   
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

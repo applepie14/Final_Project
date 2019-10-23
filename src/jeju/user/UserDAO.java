@@ -376,7 +376,7 @@ public class UserDAO {
 		} catch (Exception e) {
 			System.out.println("idFind() 메소드 에러발생" + e);
 		} finally {
-			pool.freeConnection(conn, pstmt);
+			pool.freeConnection(conn, pstmt, rs);
 		}		
 		return email;
 	}
@@ -408,7 +408,7 @@ public class UserDAO {
 		} catch (Exception e) {
 			System.out.println("loadInfo() 메소드 에러발생" + e);
 		} finally {
-			pool.freeConnection(conn, pstmt);
+			pool.freeConnection(conn, pstmt, rs);
 		}
 		return user;
 	}

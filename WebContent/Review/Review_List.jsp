@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -36,11 +38,12 @@
     <!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css" type="text/css" media="screen"><![endif]-->
 
 	<!-- CSS Page Style -->    
-    <link href="assets/css/pages/blog_masonry_3col.css" rel="stylesheet">
+    <link href="assets/css/pages/blog_masonry_3col.css" rel="stylesheet" />
     
     <!-- CSS Customization -->
+    <link rel="stylesheet" href="assets/css/custom_find.css" />
     <link rel="stylesheet" href="assets/css/custom_review.css" />
-        <link rel="stylesheet" href="assets/css/theme-colors/orange.css" />
+    <link rel="stylesheet" href="assets/css/theme-colors/orange.css" />
 </head>
 
 <body class="index-page" data-page="index">    
@@ -62,7 +65,7 @@
     <div class="breadcrumbs">
         <div class="container">
    	 		<ul class="pull-right breadcrumb">
-        		<li><a href="Review_Write.jsp">리뷰 작성</a></li>
+        		<li><a href="reviewWrite.do">리뷰 작성</a></li>
    			</ul>
         </div><!--/container-->
     </div>
@@ -72,122 +75,94 @@
     <!--=== Content Part ===-->
 		<div class="blog_masonry_3col">
 			<div class="container content grid-boxes">
+				<c:forEach var="review" items="${reviewList }">
 				<div class="grid-boxes-in">
-					<img class="img-responsive" src="Review/img/jeju1.png" alt="">
+					<img class="img-responsive" src="img/jeju1.png" alt="">
 						<div class="grid-boxes-caption">
 							<ul class="pull-right list-inline grid-boxes-news modify">
-								<li><a href="Review_Modify.jsp">수정</a></li>
-								<li>|</li>
-								<li><a href="#">삭제</a></li>
+								<c:if test ="${review.user_nickname == name }">
+									<li><a href="reviewUpdate.do?review_no=${review.review_no }">수정</a></li>
+									<li>|</li>
+									<!-- <li><a href="javascript:void(0);" onclick="deleteCheck();">삭제</a></li> -->
+									<li><a onclick="return confirm('정말로 삭제하시겠습니까?')" 
+										   href="reviewDeletePro.do?review_no=${review.review_no}">삭제</a></li>
+
+								</c:if>
 							</ul>
-							<h3>새별오름</h3>
+							<h3>${review.review_title }</h3>
 							<ul class="list-inline grid-boxes-news">
-								<li><span>By</span> <a href="#">hb</a></li>
-								<li>|</li>
-								<li><i class="fa fa-clock-o"></i>2019-08-25</li>
-								<li>|</li>
-								<li><a href="#"><i class="fa fa-comments-o"></i> 30</a></li>
+								<li>
+									<span><img src="https://i.ibb.co/sPp54hn/1.png" width="12px"></img></span> 
+									${review.review_place }</a>
+								</li>
 							</ul>
-							<p>제주도의 가을 새별오름의 억새밭을 거닐며 바람과 함께 
-							사삭사삭거리는 억새들의 소리를 들으니 자연과 함께
-							마음이 평온해지고 정말 오랜만에 힐링을 느낄 수 있었습니다. 
-							제주도의 가을은 점점 더 멋있어 지는 것 같습니다!</p>
+							<ul class="list-inline grid-boxes-news">
+								<li><span>By</span> <a href="#">${review.user_nickname }</a></li>
+								<li>|</li>
+								<li><i class="fa fa-clock-o"></i>
+									<fmt:formatDate value="${review.review_date }" 
+													 timeStyle="medium"
+													 pattern="yyyy-MM-dd" />
+								</li>
+								<li>|</li>
+								<li><a href="#"><i class="fa fa-comments-o"></i>${review.review_like_count }</a></li>
+							</ul>
+							<p style="white-space:pre-line"><c:out value="${review.review_content}"/></p>
 						</div>
 				</div>
-
-				<div class="grid-boxes-in">
-					<img class="img-responsive" src="Review/img/jeju2.png" alt="">
-						<div class="grid-boxes-caption">
-							<h3>혼인지</h3>
-							<ul class="list-inline grid-boxes-news">
-								<li><span>By</span> <a href="#">제주</a></li>
-								<li>|</li>
-								<li><i class="fa fa-clock-o"></i>2019-07-23</li>
-								<li>|</li>
-								<li><a href="#"><i class="fa fa-comments-o"></i> 16</a></li>
-							</ul>
-							<p>혼인지 수국</p>
-							<a herf="#" color="green">#혼인지</a> <a herf="#" color="green">#수국</a>
-							<a herf="#" color="green">#혼인지수국</a>
-						</div>
-				</div>
-
-				<div class="grid-boxes-in">
-					<img class="img-responsive" src="Review/img/jeju3.png" alt="">
-						<div class="grid-boxes-caption">
-							<h3>함덕백사장 & 서우봉</h3>
-							<ul class="list-inline grid-boxes-news">
-								<li><span>By</span> <a href="#">고은별</a></li>
-								<li>|</li>
-								<li><i class="fa fa-clock-o"></i>2019-05-07</li>
-								<li>|</li>
-								<li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
-							</ul>
-							<p>5월의 제주 바다는 완전 아름답고 눈부셨어요♥ 함덕 서우봉에서 내려다 본 함덕 바다의 물빛에
-								반해버렸어요. 하얀 함덕 해변 백사장에서 바라본 바다도 이뻐서 눈을 뗄수가 없었어요. ^-^ 함덕 해변가를
-								따라가다보니 해녀상도 보이더라구요. 깨끗하고 푸른 바다와 어우러진 함덕 해녀상도 멋졌어요. ^-^ 아름다웠던 5월의
-								제주 바다는 절대 잊지못할거에요♥</p>
-							<a herf="#" color="green">#5월엔제주</a> <a herf="#" color="green">#함덕해수욕장</a>
-							<a herf="#" color="green">#서우봉</a> <a herf="#" color="green">#함덕해변</a>
-						</div>
-				</div>
-
-				<div class="grid-boxes-in">
-					<img class="img-responsive" src="Review/img/jeju3.png" alt="">
-						<div class="grid-boxes-caption">
-							<h3>함덕백사장 & 서우봉</h3>
-							<ul class="list-inline grid-boxes-news">
-								<li><span>By</span> <a href="#">고은별</a></li>
-								<li>|</li>
-								<li><i class="fa fa-clock-o"></i>2019-05-07</li>
-								<li>|</li>
-								<li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
-							</ul>
-							<p>5월의 제주 바다는 완전 아름답고 눈부셨어요♥ 함덕 서우봉에서 내려다 본 함덕 바다의 물빛에
-								반해버렸어요. 하얀 함덕 해변 백사장에서 바라본 바다도 이뻐서 눈을 뗄수가 없었어요. ^-^ 함덕 해변가를
-								따라가다보니 해녀상도 보이더라구요. 깨끗하고 푸른 바다와 어우러진 함덕 해녀상도 멋졌어요. ^-^ 아름다웠던 5월의
-								제주 바다는 절대 잊지못할거에요♥</p>
-							<a herf="#" color="green">#5월엔제주</a> <a herf="#" color="green">#함덕해수욕장</a>
-							<a herf="#" color="green">#서우봉</a> <a herf="#" color="green">#함덕해변</a>
-						</div>
-				</div>
-
-				<div class="grid-boxes-in">
-					<img class="img-responsive" src="Review/img/jeju1.png" alt="">
-						<div class="grid-boxes-caption">
-							<h3>새별오름</h3>
-							<ul class="list-inline grid-boxes-news">
-								<li><span>By</span> <a href="#">hb</a></li>
-								<li>|</li>
-								<li><i class="fa fa-clock-o"></i>2019-08-25</li>
-								<li>|</li>
-								<li><a href="#"><i class="fa fa-comments-o"></i> 30</a></li>
-							</ul>
-							<p>제주도의 가을 새별오름의 억새밭을 거닐며 바람과 함께 사삭사삭거리는 억새들의 소리를 들으니 자연과 함께
-								마음이 평온해지고 정말 오랜만에 힐링을 느낄 수 있었습니다. 제주도의 가을은 점점 더 멋있어 지는 것 같습니다!</p>
-						</div>
-				</div>
-
-				<div class="grid-boxes-in">
-					<img class="img-responsive" src="Review/img/jeju2.png" alt="">
-						<div class="grid-boxes-caption">
-							<h3>혼인지</h3>
-							<ul class="list-inline grid-boxes-news">
-								<li><span>By</span> <a href="#">제주</a></li>
-								<li>|</li>
-								<li><i class="fa fa-clock-o"></i>2019-07-23</li>
-								<li>|</li>
-								<li><a href="#"><i class="fa fa-comments-o"></i> 16</a></li>
-							</ul>
-							<p>혼인지 수국</p>
-							<a herf="#" color="green">#혼인지</a> <a herf="#" color="green">#수국</a>
-							<a herf="#" color="green">#혼인지수국</a>
-						</div>
-				</div>
-
+				</c:forEach>
 			</div>
+			</div>
+			
+			<form name="test" class="search" action="review.do">
+					<select class="searchlist" name="search">
+						<option value="Review_Title">제목</option>
+						<option value="place">장소</option>
+						<option value="User_Nickname">작성자</option>
+					</select>
+					&nbsp;
+					<input type="text" class="searchtext" size="15" name="searchtext" placeholder="&nbsp;검색어를 입력하세요" >&nbsp;
+					<input class="searchbutton btn-u" type="submit" value="검색">
+			</form><p>
 			<!--/container-->
-		</div>
+			
+			<!-- 페이징 처리 -->
+                <div class="pagination1">
+                <ul class="pagination">
+                	<li>
+                		<c:if test="${pgList.startPage > pgList.blockSize }">
+							<a href = "review.do?pageNum=${pgList.startPage-pgList.blockSize}&search=${search}&searchtext=${searchtext}" class="before_next"><font>◀</font></a>
+						</c:if>
+					</li>
+		
+					
+				 <c:forEach var="i" begin="${pgList.startPage}"  end="${pgList.endPage}">
+                     <c:if test="${pgList.currentPage==i }">
+                        <li class="active">
+                           <a href="review.do?pageNum=${i }&search=${search}&searchtext=${searchtext}" class="paging_now active">
+                              <font>${i }</font>
+                           </a>
+                        </li>                     
+                     </c:if>
+                     <c:if test="${pgList.currentPage !=i }">
+                        <li class="">
+                           <a href="review.do?pageNum=${i }&search=${search}&searchtext=${searchtext}" class="paging_now active">
+                              <font>${i }</font>
+                           </a>
+                        </li>                     
+                     </c:if>
+                  </c:forEach>
+					
+					
+					<li>
+						<c:if test="${pgList.endPage < pgList.pageCount}">
+							<a href = "review.do?pageNum=${pgList.startPage+pgList.blockSize}&search=${search}&searchtext=${searchtext}" class="before_next"><font>▶</font></a>
+						</c:if>
+					</li>
+				</ul>
+				</div>
+				
+				<!-- End Pagination -->
 		<!--=== End Content Part ===-->
 <!-- 기본 페이지 끝 -->
 
@@ -230,6 +205,7 @@
         App.init();
         });
 </script>
+
 <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
     <script src="assets/plugins/html5shiv.js"></script>

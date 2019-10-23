@@ -44,6 +44,7 @@
 <link rel="stylesheet" href="assets/css/custom_review.css" />
 <link rel="stylesheet" href="assets/css/theme-colors/orange.css" />
 </head>
+
 <body>
 	<%@include file="../header.jsp"%>
 
@@ -60,54 +61,51 @@
 				<!--=== Breadcrumbs ===-->
 				<div class="container reviewhead">
 					<div class="headline reviewhead1">
-						<h2>리뷰 작성</h2>
+						<h2>리뷰 수정</h2>
 					</div>
 				</div>
 				<!--/container-->
-				
+
 				<!-- General Unify Forms -->
-				<form method="post" action="reviewWritePro.do" class="sky-form">
+				<form method="post" action="reviewUpdatePro.do?review_no=${review.review_no }" class="sky-form">
 					<fieldset>
 						<section> 
 							<label class="label">리뷰 제목</label> 
-							<label class="input"> <input type="text" name="review_title"></label> 
+							<label class="input"> <input type="text" name="review_title" value="${review.review_title }"></label> 
 						</section>
 						<section> 
 							<label class="label">위치</label> 
-							<label class="input"> <input type="text" name="review_place"></label> 
+							<label class="input"> <input type="text" name="review_place" value="${review.review_place }"></label> 
 						</section>
 						<section> 
 							<label class="label">사진 등록</label> 
 							<label for="file" class="input input-file">
 								<div class="button">
-									<input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value" value="Blowse">
+									<input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
 								</div> 
-								<input type="text"name="review_img" readonly>
+								<input type="text" readonly>
 							</label> 
 						</section>
 					</fieldset>
 
 					<fieldset>
 						<section> 
-							<label class="label">내용 입력</label> 
-							<label class="textarea">
-								<textarea rows="10" name="review_content"></textarea>
-							</label>
+						<label class="label">내용 입력</label> 
+						<label class="textarea">
+							<textarea rows="10" name="review_content" >${review.review_content }</textarea>
+						</label>
 						<div class="note"></div>
 						</section>
-
 					</fieldset>
 
 					<footer>
-					<button type="submit" class="btn-u">등록</button>
-					<button type="button" class="btn-u btn-u-default" onclick="location.href='Review_List.jsp'">취소</button>
+					<button type="submit" class="btn-u">수정</button>
+					<button type="button" class="btn-u btn-u-default" onclick="location.href='review.do'">취소</button>
 					</footer>
 				</form>
 				</center>
 
 				<!-- 기본 페이지 끝 -->
-
-				
 			</div>
 		</div>
 
@@ -143,7 +141,6 @@
 			RevolutionSlider.initRSfullWidth();
 		});
 	</script>
-	
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
     <script src="assets/plugins/html5shiv.js"></script>

@@ -4,16 +4,12 @@
 .notice-container {
 	width: 800px;
 	margin: 50px auto;
-	/* 깃 변경 */
 }
-
-
 @media (max-width: 768px) {
 	.notice-container {
 		width: 100%;
 	}
 }
-
 .clients-page {
 	margin-bottom: 5px;
 	margin-top: 5px;

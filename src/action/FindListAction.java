@@ -43,7 +43,7 @@ public class FindListAction implements CommandAction {
 		}
 
 		// 2. 처리한 결과를 공유(서버메모리에 저장) -> 이동할 페이지에 공유해서 사용(request객체)
-		// request.getAttribute("currentPage"(키명)) -> ${키명}
+		// request.getAttribute("currentPage"(키명)) -> ${키명}	
 		request.setAttribute("search", search); // 검색분야
 		request.setAttribute("searchtext", searchtext); // 검색어
 		request.setAttribute("pgList", pgList); // 페이징처리 10개 정보

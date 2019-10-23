@@ -55,25 +55,24 @@ margin-bottom: 50px;}
 
 <!-- 기본 페이지 이 아래로 합치면 됨 -->
 <!-- Contacts -->
-                <form action="#" method="post" id="sky-form3" class="sky-form">
+                <form action="noticeModifyPro.do?notice_no=${article.notice_no}" method="post" id="sky-form3" class="sky-form">
 
                     <fieldset>                  
                       <div class="notice-container"> 
                        <div class="headline"> <h2>공지사항 수정</h2> </div>
                    
                         <section>
-                            <label class="label">글제목</label>
+                            <label class="label">공지 제목</label>
                             <label class="input">
-                              
-                                <input type="text" name="subject" id="subject">
+                                <input type="text" name="subject" id="subject" value="${article.notice_title}"/>
                             </label>
                         </section>
                         
                         <section>
-                            <label class="label">글내용</label>
+                            <label class="label">내용</label>
                             <label class="textarea">
                               
-                                <textarea rows="4" name="message" id="message"></textarea>
+                                <textarea rows="4" name="message" id="message">${article.notice_content}</textarea>
                             </label>
                         </section>
                         

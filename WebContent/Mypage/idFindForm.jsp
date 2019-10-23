@@ -82,57 +82,31 @@
 </div><!--/wrapper-->
 <%@include file="../footer.jsp" %>
    
-<!-- JS Global Compulsory -->			
+<!-- JS Global Compulsory -->           
 <script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
-<!-- 부트스트랩  -->
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
 <!-- JS Implementing Plugins -->
 <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
-<script type="text/javascript" src="assets/plugins/jquery.parallax.js"></script>
-<script type="text/javascript" src="assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
-<script type="text/javascript" src="assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
-<script type="text/javascript" src="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-<script type="text/javascript" src="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
+<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
+<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 <!-- JS Customization -->
 <script type="text/javascript" src="assets/js/custom.js"></script>
 <!-- JS Page Level -->           
 <script type="text/javascript" src="assets/js/app.js"></script>
-<script type="text/javascript" src="assets/js/plugins/fancy-box.js"></script>
-<script type="text/javascript" src="assets/js/plugins/owl-carousel.js"></script>
-<script type="text/javascript" src="assets/js/plugins/revolution-slider.js"></script>
+<script type="text/javascript" src="assets/js/plugins/masking.js"></script>
+<script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
+<script type="text/javascript" src="assets/js/plugins/validation.js"></script>
+<script type="text/javascript" src="assets/js/forms/registerCheck.js"></script>
+<script type="text/javascript" src="assets/js/forms/ducheck.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
-      	App.init();
-        App.initParallaxBg();
-        FancyBox.initFancybox();
-        OwlCarousel.initOwlCarousel();
-        RevolutionSlider.initRSfullWidth();
-
-    	
-    	$("#new_password").keyup(function(){
-    		var regex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/; // 표현식
-    		if (!regex.test($("#new_password").val())) { // test 메소드 : 특정한 필드에 입력한 값에
-    														// 대한 유효성을 검사
-    			$('#pw .error').text("비밀번호는 문자, 숫자, 특수문자 포함 8자리 이상입니다.");
-    			$("#new_password").focus();
-    			return false;
-    		} else {
-    			$('#pw .error').text("");
-    			return true;
-    		}
-    	})
-    	
-    	$("#pwdConfirm").keyup(function(){
-        	if($("#new_password").val() != $("#pwdConfirm").val()){
-        		$('#pw-confirm .error').text("비밀번호가 일치하지 않습니다.")
-    			return false;
-    		} else {
-    			$('#pw-confirm .error').text("");
-    			return true;
-    		}
-    	})
+        App.init();
+        Masking.initMasking();
+        Datepicker.initDatepicker();
+        Validation.initValidation();
     });
 </script>
 <!--[if lt IE 9]>

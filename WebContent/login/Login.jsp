@@ -74,7 +74,7 @@
                 </form>
                     <hr />
 
-                    <a class="color-dark" href="#">이메일 찾기</a> | 
+                    <a class="color-dark" href="idFindForm.do">이메일 찾기</a> | 
                     <a class="color-dark" href="passwordTemp.do">비밀번호 찾기</a>
                     <a class="color-green pull-right" href="registerform.do">회원가입</a>
                     

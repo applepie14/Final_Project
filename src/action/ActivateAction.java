@@ -34,7 +34,6 @@ public class ActivateAction implements CommandAction {
 		if(rightCode == true) {
 			userDAO.ActivateUpdate(email);
 			session.setAttribute("activate", userDAO.ActivateSelect(email)[1]);
-			
 		}
 		
 		return url;

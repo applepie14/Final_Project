@@ -11,7 +11,7 @@ public class LoginProAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		request.setCharacterEncoding("UTF-8");
-		String url = "/login/Login.jsp";
+		String url= "/login/LoginPro.jsp";
 		
 		HttpSession session = request.getSession(true);
 		
@@ -30,13 +30,10 @@ public class LoginProAction implements CommandAction {
 		System.out.println("name : " + name);
 		System.out.println("activate : " + activate);
 		
-		if(name.equals("")) {
-			url= "/login/Login.jsp";
-		}else {
+		if(name.equals("") == false) {
 			session.setAttribute("email", email);
 			session.setAttribute("name", name);
 			session.setAttribute("activate", activate);
-			url= "/login/LoginPro.jsp";
 		}
 		
 		return url;

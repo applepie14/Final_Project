@@ -51,6 +51,38 @@
     list-style: none;
 }
 
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+
+.sky-form .row {
+    margin: 0 -15px;
+    margin-top: -30px;
+}
+ h2{
+    color: #555;
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none;
+    font-weight: normal;
+    font-family: "Open Sans", Arial, sans-serif;
+}
+.sky-form fieldset {
+    display: block;
+    padding: 10px 50px 5px;
+    border: none;
+    background: rgba(255,255,255,.9);
+    padding-bottom: 100px;
+}
+.breadcrumbs-v1-list-2 h1 {
+    font-size: 50px;
+    line-height: 35px;
+    color:gray;
+}
+span {color:gray;
+      font-size:24px;}
+
 
 </style>
 </head>
@@ -60,10 +92,11 @@
 <!-- 기본 페이지 이 아래로 합치면 됨 -->
 
 <!--=== Breadcrumbs v1 ===-->
-  <form action="assets/php/demo-contacts-process.php" method="post" id="sky-form3" class="sky-form">
-	<div class="breadcrumbs-v1">
+  <form method="post" id="sky-form3" class="sky-form">
+	<div class="breadcrumbs-v1-list-2">
 		<div class="container">
 			<span>Notic Detail</span>
+			<h1>공지사항</h1>
 		</div>
 	</div>
 	<!--=== End Breadcrumbs v1 ===-->
@@ -72,7 +105,15 @@
 	<div class="notice-container">
 		<div class="row">
 			<div class="col-md-12 mb-3">
-				<div class="headline"><h2>공지사항</h2></div>
+				<div class="headline"><h2>공지사항</h2>
+				<!--Table Bordered-->
+			<ul class="pull-right breadcrumb">
+        		<li><a href="noticeModify.do?notice_no=${article.notice_no}">수정</a></li>
+        		<li><a a onclick="return confirm('정말로 삭제하시겠습니까?')" 
+                                 href="noticeDeletePro.do?notice_no=${article.notice_no}&pageNum=${pgList.startPage-pgList.blockSize}">삭제</a></li>
+        		
+   			</ul>
+				</div>
 			</div>
 	</div>
 	
@@ -81,20 +122,17 @@
         	<h2>${article.notice_title}</h2>
             <div class="blog-post-tags">
                  <ul class="list-unstyled list-inline blog-info" >
-                    <li><i class="fa fa-calendar"></i> September 02, 2019</li>   
+                    <li><i class="fa fa-calendar"></i>${article.notice_date }</li>   
                     <li><i class="fa fa-comments-o"></i>조회수</li>
+                    <li>${article.notice_count}</li>
                 </ul>                    
             </div>
-            <p class="detail-p">공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 
-            내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 
-            내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용공지사항 내용</p>
+            <p class="detail-p">${article.notice_content}</p>
 		
 		
-		
-		<div class="content">
-			<button class="btn-u pull-right" type="button" onclick="window.history.back();">목록</button>  
-			   
-		</div>
+
+	  <button type="button" class="btn-u pull-right" onclick="window.history.back();">목록</button>
+
 	</div> 
  </fieldset>
 
@@ -160,6 +198,10 @@
         OwlCarousel.initOwlCarousel();
         RevolutionSlider.initRSfullWidth();
     });
+ /*    
+    function modi(){
+    	location.href='noticeModify.do?notice_no=${article.notice_no}'
+    } */
 </script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

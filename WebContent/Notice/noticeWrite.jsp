@@ -71,7 +71,7 @@ margin-bottom: 50px;}
                             <label class="label">글제목</label>
                             <label class="input" >
                               
-                                <input type="text" name="notice_title" id="subject" value="ㄱㄱㄱ"/>
+                                <input type="text" name="notice_title" id="subject" value=""/>
                             </label>
                         </section>
                         

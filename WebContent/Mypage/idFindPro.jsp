@@ -52,19 +52,19 @@
     <div class="container content">
     <c:if test="${email != ''}">
 		<div class="col-md-12 col-sm-12">
-			<div class="service-block service-block-orange">
-				<i class="icon-custom icon-color-light rounded-x icon-line icon-fire"></i>
+			<div class="service-block service-block-light">
+				<i class="icon-custom icon-color-dark rounded-x icon-line icon-user-following"></i>
 					<h2 class="heading-md">${email}</h2>
-					<a style="color:#fff;" href="login.do">로그인</a>
+					<a class="color-orange" href="login.do">로그인</a>
 			</div>
 		</div>
 	</c:if>
     <c:if test="${email == ''}">
 		<div class="col-md-12 col-sm-12">
 			<div class="service-block service-block-light">
-				<i class="icon-custom icon-color-light rounded-x icon-line icon-fire"></i>
+				<i class="icon-custom icon-color-dark rounded-x icon-line icon-user-unfollow"></i>
 					<h2 class="heading-md margin-bottom-20">정보가 없습니다. 입력하신 정보를 확인해주세요</h2>
-					<button class="btn btn-u" type="button" onclick="history.back()">뒤로가기</button>
+					<a class="color-orange" onclick="history.back()">뒤로가기</a>
 			</div>
 		</div>
     </c:if>
@@ -105,30 +105,6 @@
         FancyBox.initFancybox();
         OwlCarousel.initOwlCarousel();
         RevolutionSlider.initRSfullWidth();
-
-    	
-    	$("#new_password").keyup(function(){
-    		var regex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/; // 표현식
-    		if (!regex.test($("#new_password").val())) { // test 메소드 : 특정한 필드에 입력한 값에
-    														// 대한 유효성을 검사
-    			$('#pw .error').text("비밀번호는 문자, 숫자, 특수문자 포함 8자리 이상입니다.");
-    			$("#new_password").focus();
-    			return false;
-    		} else {
-    			$('#pw .error').text("");
-    			return true;
-    		}
-    	})
-    	
-    	$("#pwdConfirm").keyup(function(){
-        	if($("#new_password").val() != $("#pwdConfirm").val()){
-        		$('#pw-confirm .error').text("비밀번호가 일치하지 않습니다.")
-    			return false;
-    		} else {
-    			$('#pw-confirm .error').text("");
-    			return true;
-    		}
-    	})
     });
 </script>
 <!--[if lt IE 9]>

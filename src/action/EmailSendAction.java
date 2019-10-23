@@ -40,13 +40,15 @@ public class EmailSendAction implements CommandAction {
 		String emailChecked = userDao.ActivateSelect(email)[1]; // user[1]은 Activate
 
 		// 사용자에게 보낼 메시지를 기입합니다.
-		String host = "localhost:8090/JEJU3/";
+		String host = request.getHeader("host") + request.getContextPath() + "/";
+		System.out.println("host ▶ " + host);
 		String from = "jeju131316@gmail.com";
 		String to = userDao.ActivateSelect(email)[0]; // user[0]은 email
 		String subject = "회원 가입 이메일 인증";
 		String content = "<p>다음 링크에 접속하여 이메일 확인을 진행하세요.</p>"
 				+ "<a href='" + host + "activate.do?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
 		// SMTP에 접속하기 위한 정보를 기입합니다.
+		System.out.println("content ▶ " + content);
 
 		Properties p = new Properties();
 		p.put("mail.smtp.host", "smtp.googlemail.com");
