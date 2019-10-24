@@ -66,23 +66,23 @@
 				<!--/container-->
 				
 				<!-- General Unify Forms -->
-				<form method="post" action="reviewWritePro.do" class="sky-form">
+				<form method="post" enctype = "multipart/form-data" action="reviewWritePro.do" class="sky-form">
 					<fieldset>
 						<section> 
 							<label class="label">리뷰 제목</label> 
-							<label class="input"> <input type="text" name="review_title"></label> 
+							<label class="input"> <input type="text" name="review_title" /></label> 
 						</section>
 						<section> 
 							<label class="label">위치</label> 
-							<label class="input"> <input type="text" name="review_place"></label> 
+							<label class="input"> <input type="text" name="review_place" /></label> 
 						</section>
 						<section> 
 							<label class="label">사진 등록</label> 
 							<label for="file" class="input input-file">
 								<div class="button">
-									<input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value" value="Blowse">
+									<input type="file" name="review_img" id="file"  onclick="value()" onchange="this.parentNode.nextSibling.value = this.value" />Blowse
 								</div> 
-								<input type="text"name="review_img" readonly>
+								<input type="text" id="filename" readonly />
 							</label> 
 						</section>
 					</fieldset>
@@ -99,7 +99,7 @@
 					</fieldset>
 
 					<footer>
-					<button type="submit" class="btn-u">등록</button>
+					<button type="submit"  class="btn-u">등록</button>
 					<button type="button" class="btn-u btn-u-default" onclick="location.href='Review_List.jsp'">취소</button>
 					</footer>
 				</form>
@@ -142,6 +142,10 @@
 			OwlCarousel.initOwlCarousel();
 			RevolutionSlider.initRSfullWidth();
 		});
+		
+		function value(){
+			$("#file").val() = $("#filename").val()
+		}
 	</script>
 	
 	<!--[if lt IE 9]>

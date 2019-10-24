@@ -77,11 +77,11 @@
 			<div class="container content grid-boxes">
 				<c:forEach var="review" items="${reviewList }">
 				<div class="grid-boxes-in">
-					<img class="img-responsive" src="img/jeju1.png" alt="">
+					<img class="img-responsive" src="assets/review_img/${review.review_img}" alt="">
 						<div class="grid-boxes-caption">
 							<ul class="pull-right list-inline grid-boxes-news modify">
 								<c:if test ="${review.user_nickname == name }">
-									<li><a href="reviewUpdate.do?review_no=${review.review_no }">수정</a></li>
+									<li><a href="">수정</a></li>
 									<li>|</li>
 									<!-- <li><a href="javascript:void(0);" onclick="deleteCheck();">삭제</a></li> -->
 									<li><a onclick="return confirm('정말로 삭제하시겠습니까?')" 
