@@ -28,6 +28,7 @@ public class NoticeDetailAction implements CommandAction {
 	 //    request.setAttribute("pageNum", pageNum);
 	      request.setAttribute("article", article); 
 	      // ref, re_step, re_level이 article에 포함되어 있음
+	     
 
 		
 		return "/Notice/noticeDetail.jsp";

@@ -1,5 +1,6 @@
 package action;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
@@ -19,8 +20,9 @@ public class PlanListAction implements CommandAction {
 		request.setCharacterEncoding("utf-8");
 		String pageNum = request.getParameter("pageNum");
 		String palnsubject= request.getParameter("palnsubject")==null ? "" :request.getParameter("palnsubject");
-		String theme = request.getParameter("theme")==null ? "" : request.getParameter("theme");
-		String gender= request.getParameter("gender")==null ? "" : request.getParameter("gender");
+		String theme = request.getParameter("theme")==null ? "" : "'"+request.getParameter("theme")+"'";
+		
+		String gender= request.getParameter("gender")==null ? "" : "'"+request.getParameter("gender")+"'";
 		String[] tags= new String[6];
 		if (request.getParameterValues( "tags" )==null) {
 			for( int i=0;i<tags.length; i++){
@@ -41,7 +43,8 @@ public class PlanListAction implements CommandAction {
 		}
 		
 		String date = request.getParameter("date")==null ? "" : request.getParameter("date");
-		//SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+	
+		
 		int day=request.getParameter("day")==null ?  0: Integer.parseInt(request.getParameter("day"));
 		int p=request.getParameter("p")==null ? 0:Integer.parseInt(request.getParameter("p"));
 		System.out.println("PlanListAction의 매개변수 확인");

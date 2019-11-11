@@ -61,8 +61,8 @@
 		<div class="content">
 			<!--Table Bordered-->
 			<ul class="pull-right breadcrumb">
-        		<li><a href="schedule_Modifiy.jsp">일정 수정하기</a></li>
-        		<li><a href="schedule_Modifiy.jsp">일정 삭제하기</a></li>
+        		<li><a href="planModify.do?plan_no=${article.plan_no}">일정 수정하기</a></li>
+        		<li><a href="planDeletePro.do?plan_no=${article.plan_no}">일정 삭제하기</a></li>
         		<li><a href="schedule_Modifiy.jsp">쪽지 보내기</a></li>
    			</ul>
 			<div class="headline">
@@ -74,49 +74,59 @@
 				<table class="table">
 					<tr class="name">
 						<th align="center" >일정 제목</th>
-						<td colspan="3" align="center" class="text-left"><font size=4pt>제주도 식도락 여행!</font>
+						<td colspan="3" align="center" class="text-left"><font size=4pt>${article.plan_title}</font>
 						</td>
 							
 						<th>조회수</th>
-						<td>45</td>
+						<td>${article.plan_count}</td>
 					</tr>
 					<tr>
 
 					</tr>
 					<tr>
 						<th>여행기간</th>
-						<td>4일</td>
+						<td>${article.plan_period}일</td>
 						<th>출발일</th>
-						<td>19/10/11</td>
+						<td>${article.plan_startdate}</td>
 						<th>일정 등록일시</th>
-						<td>19/09/10</td>
+						<td>${article.plan_date}</td>
 					</tr>
 
 					<tr>
 						<th>작성자</th>
-						<td>test@naver.com</td>
+						<td>${article.user_nickname}</td>
 						<th>태그</th>
 						<td>
-
-							<button class="btn btn-warning btn-xs">
+				
+						<c:forEach var="i" begin="0" end="${tags.size()-1}" step="1">
+						 <button class="btn btn-warning btn-xs">
+						 
+								<i class="fa fa-pencil"></i> ${tags.get(i)}
+							</button> 
+						</c:forEach>
+							<!-- <button class="btn btn-warning btn-xs">
 								<i class="fa fa-pencil"></i> 식도락
 							</button>
 							<button class="btn btn-warning btn-xs">
 								<i class="fa fa-pencil"></i> 명소
-							</button>
+							</button> -->
 						</td>
 						<th>태마</th>
-						<td><button class="btn btn-info btn-xs">가족</button></td>
+						<td><button class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> ${article.plan_theme} </button></td>
 
 					</tr>
 					<tr>
 						<th>모집 성별</th>
-						<td><button class="btn btn-success btn-xs">여성</button></td>
+						<td><button class="btn btn-success btn-xs"><i class="fa fa-pencil"></i>
+						<c:if test="${article.plan_gender eq 'M'}">남성</c:if>
+						<c:if test="${article.plan_gender eq 'F'}">여성</c:if>
+						<c:if test="${article.plan_gender eq 'N'}">상관없음</c:if>
+						</button></td>
 						<th>모집인원
 							</td>
-							<td>5명</td>
+							<td>${article.plan_nop} 명</td>
 							<th>좋아요</th>
-							<td><button class="btn btn-info btn-xs">좋아요 1</button></td>
+							<td><a>&#10084;${article.plan_like_count}<a/></td>
 					</tr>
 				</table>
 			</div>
@@ -130,13 +140,13 @@
 					<div class="row tab-v3">
 						<div class="col-sm-3">
 							<ul class="nav nav-pills nav-stacked">
-								<li>
-									<a href="#map" data-toggle="tab">
+								<li class="active">
+									<a href="#map-1" data-toggle="tab">
 										<i class="fa fa-calendar"></i> 
 									map
 									</a>
 								</li>
-								<li class="active">
+								<li>
 									<a href="#home-2" data-toggle="tab">
 										<i class="fa fa-calendar"></i>
 									Day1
@@ -159,18 +169,63 @@
 						<div class="col-sm-9">	
 							<div class="tab-content">
 								<!-- 지도 부분 -->
-					
-							<div class="tab-pane fade in " id="map" style="height:500px;">
-							
-							</div>				
-							<!-- 지도 끝 -->	
-							
-								<div class="tab-pane fade in active" id="home-2">
+
+									<div class="tab-pane fade in active" id="map-1">
+									<div id="map" style="width: 100%; height: 400px;"></div>
+									<script type="text/javascript"
+										src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4b584c100fe1ae5b627bb263ca582ac0"></script>
+									<script>
+										var mapContainer = document
+												.getElementById('map'), // 지도를 표시할 div 
+										mapOption = {
+											center : new kakao.maps.LatLng(
+													33.450701, 126.570667), // 지도의 중심좌표
+											level : 3
+										// 지도의 확대 레벨
+										};
+
+										var map = new kakao.maps.Map(
+												mapContainer, mapOption); // 지도를 생성합니다
+
+										// 버튼을 클릭하면 아래 배열의 좌표들이 모두 보이게 지도 범위를 재설정합니다 
+										var points = [
+												new kakao.maps.LatLng(
+														33.452278, 126.567803),
+												new kakao.maps.LatLng(
+														33.452671, 126.574792),
+												new kakao.maps.LatLng(
+														33.451744, 126.572441) ];
+
+										// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
+										var bounds = new kakao.maps.LatLngBounds();
+
+										var i, marker;
+										for (i = 0; i < points.length; i++) {
+											// 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
+											marker = new kakao.maps.Marker({
+												position : points[i]
+											});
+											marker.setMap(map);
+
+											// LatLngBounds 객체에 좌표를 추가합니다
+											bounds.extend(points[i]);
+										}
+
+										function setBounds() {
+											// LatLngBounds 객체에 추가된 좌표들을 기준으로 지도의 범위를 재설정합니다
+											// 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
+											map.setBounds(bounds);
+										}
+									</script>
+									</div>
+									<!-- 지도 끝 -->
+
+									<div class="tab-pane fade" id="home-2">
 									<h4>DAY1</h4>
 									<!-- 타임라인 -->
 									<div class="col-md-9">	
 										<ul class="timeline-v2">
-											<li><time class="cbp_tmtime" datetime="" /> <span>4/1/08</span>
+											<li><time class="cbp_tmtime" datetime=""> <span>4/1/08</span>
 												<span>January</span></time> <i
 												class="cbp_tmicon rounded-x hidden-xs"></i>
 												<div class="cbp_tmlabel">
@@ -178,7 +233,7 @@
 													<div class="row">
 														<div class="col-md-4">
 															<img class="img-responsive" src="assets/img/1.jpg" alt="" />
-																<div class="md-margin-bottom-20"></div>
+															<div class="md-margin-bottom-20"></div>
 														</div>
 														<div class="col-md-8">
 															<p>Winter purslane courgette pumpkin quandong
@@ -778,36 +833,22 @@
 	<script type="text/javascript" src="assets/js/app.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/fancy-box.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/owl-carousel.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/revolution-slider.js"></script>
-	
-	
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4b584c100fe1ae5b627bb263ca582ac0&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript"
+		src="assets/js/plugins/revolution-slider.js"></script>
 	<script type="text/javascript">
-	    jQuery(document).ready(function() {
-	      	App.init();
-	        App.initParallaxBg();
-	        FancyBox.initFancybox();
-	        OwlCarousel.initOwlCarousel();
-	        RevolutionSlider.initRSfullWidth();
-	    });
-	    
-		var container = document.getElementById('map');
-		var options = {
-			center : new kakao.maps.LatLng(33.4705668076, 126.3416562839),
-			level : 3
-		};
-
-		var map = new kakao.maps.Map(container, options);
-        
-        container.style.width = '500px';
-        container.style.height = '500px';
-
-        map.relayout();
-	</script>
+    jQuery(document).ready(function() {
+      	App.init();
+        App.initParallaxBg();
+        FancyBox.initFancybox();
+        OwlCarousel.initOwlCarousel();
+        RevolutionSlider.initRSfullWidth();
+    });
+</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
     <script src="assets/plugins/html5shiv.js"></script>
     <script src="assets/plugins/placeholder-IE-fixes.js"></script>
 <![endif]-->
+
 </body>
 </html>

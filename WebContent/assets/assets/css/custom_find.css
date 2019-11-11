@@ -1,0 +1,340 @@
+/* Add here all your css styles (customizations) */
+
+.breadcrumbs-v1 {
+    padding: 100px 0;
+    position: relative;
+    background: url("https://i.ibb.co/N3fh9Rz/Jeju-back-2.jpg") center no-repeat;
+    background-size: 100% 250%;
+}
+
+.findlist {
+	margin : 10px auto;
+	float : none;
+}
+
+.findhead {
+    width: 98%;
+    padding: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.findhead1 {
+	display: block;
+    margin: 20px 10px 30px 10px;
+    width: auto;
+}
+
+.sky-form footer {
+    text-align: center;
+}
+
+.sky-form section {
+    margin-bottom: 10px;
+}
+
+i.fa.fa-angle-left,
+i.fa.fa-angle-right {
+    margin-top: 15px;
+}
+
+.sky-form .radio, .sky-form .checkbox {
+    margin-left: 20px;
+}
+
+.sky-form fieldset {
+    padding: 25px 30px 20px;
+}
+
+table, th {
+	text-align : center;
+}
+
+.h{
+	text-align : left;
+}
+
+.pagination1, 
+form.search {
+    text-align: center;
+}
+
+input.searchtext {
+	width: 50%
+}
+
+select.searchlist {
+    height: 25px;
+    vertical-align: middle;
+}
+
+input.searchbutton.btn-u {
+    vertical-align: middle;
+    height: 25px;
+    padding-top : 2px;
+}
+
+/* MODAL */
+.modal-login {
+	color: #636363;
+	margin-bottom : 20px;
+}
+
+.modal-info {
+	text-align : center;
+}
+
+.modal-login .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+	margin-left:10px;
+}
+
+.modal-login .modal-header {
+	border-bottom: none;
+	position: relative;
+	justify-content: center;
+}
+
+.modal-login h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -15px;
+}
+
+.modal-login .form-control:focus {
+	border-color: #70c5c0;
+}
+
+.modal-login .form-control, .modal-login .btn {
+	min-height: 40px;
+	border-radius: 3px;
+}
+
+.modal-login .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}
+
+.modal-login .modal-footer {
+	background: #ecf0f1;
+	border-color: #dee4e7;
+	text-align: center;
+	justify-content: center;
+	margin: 0 -20px -20px;
+	border-radius: 5px;
+	font-size: 13px;
+}
+
+.modal-login .modal-footer a {
+	color: #999;
+}
+
+.modal-login .avatar {
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: -70px;
+	width: 95px;
+	height: 95px;
+	border-radius: 50%;
+	z-index: 9;
+	background: #60c7c1;
+	padding: 15px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.modal-login .avatar img {
+	width: 100%;
+}
+
+.modal-login.modal-dialog {
+	margin-top: 80px;
+}
+
+.modal-login .btn {
+	color: #fff;
+	border-radius: 4px;
+	background: #e67e22;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	border: none;
+}
+
+.modal-login .btn:hover, .modal-login .btn:focus {
+	background: #d35400;
+	outline: none;
+}
+
+.trigger-btn {
+	display: inline-block;
+}
+
+
+table.modal-content-table tr,
+table.modal-content-table td{
+	padding:10px;
+}
+
+table.modal-content-table {
+    text-align: left;
+    margin: 5px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+button.btn.btn-primary.btn-lg.btn-block.login-btn {
+    font-size: 15px;
+}
+
+.btn-u.btn-u-green {
+    background: #27ae60;
+}
+
+.btn-u.btn-u-green:hover {
+    background: #229954;
+}
+/* MODAL Update 부분 */
+input.UpdateTitle {
+    width: 96%;    
+}
+
+.modal-body.Update {
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+table.modal-content-table {
+    text-align: left;
+    width: 100%;
+    margin: 5px;
+}
+
+textarea.UpdateContent, 
+textarea.SendContent {
+    width: 100%;
+    resize: none;
+}
+
+input.Updatestart, 
+input.Updateend {
+    width: 40%;
+}
+
+td.UpdateDate{
+	width: 27%
+}
+
+td.UpdateCheckBox{
+	width: 24%
+}
+
+td.Recipient,
+td.SendTitle,
+td.date {
+    font-weight: bolder;
+}
+
+td.Sender{
+	text-align: right;
+}
+
+td.Recipient,
+td.SendTitle {
+    width: 22%;
+}
+
+
+td.rowspan {
+	vertical-align: baseline;
+    font-weight: bolder;
+}
+
+table.modal-content-table.UpdateTag input[type="checkbox"],
+table.modal-content-table.UpdateTag input[type="radio"] {
+    margin: 4px;
+}
+
+table.modal-content-table.UpdateTag td {
+    padding: 0px;
+}
+
+.fontsize{
+	font-size: 15px;
+}
+
+/* 오늘날짜 선택 버튼 기본 */
+button.ui-datepicker-current.ui-state-default.ui-priority-secondary.ui-corner-all,
+button.ui-datepicker-close.ui-state-default.ui-priority-primary.ui-corner-all {
+    float: left;
+    background: #fff;
+    border: 1px solid #e67e22;
+    color:#e67e22;
+    padding: 3px 10px;
+    margin-top: 10px;
+}
+/* 오늘날짜 선택 버튼 hover */
+button.ui-datepicker-current.ui-state-default.ui-priority-secondary.ui-corner-all:hover,
+button.ui-datepicker-close.ui-state-default.ui-priority-primary.ui-corner-all:hover  {
+    background: #e67e22;
+    border: 1px solid #e67e22;
+    color:#fff;
+}
+/* 닫기 버튼 기본 */
+button.ui-datepicker-close.ui-state-default.ui-priority-primary.ui-corner-all {
+    float: right;
+}
+
+a.ui-state-default.ui-state-highlight {
+    color: #000;
+    font-size: 15px;
+    background: #ddd;
+}
+
+.Listend:before,
+.end:before {
+	content: ' ~ ';
+}
+
+/* =====-- datepicker에 옵션 스타일 --===== */
+
+
+@media ( max-width : 768px) {
+	.breadcrumbs-v1 h1 {
+		font-size: 50px;
+		line-height: 55px;
+	}
+}
+
+@media ( min-width : 768px) {
+	
+}
+
+@media ( max-width : 992px) {
+	.Liststart, .Listend {
+		display: block;
+	}
+}
+
+@media ( max-width : 1200px) {
+	.col-md-9 {
+	    width: 100%;
+	}
+}
+
+@media ( max-width : 623px) {
+	.Listend {
+		display: none;
+	}
+	
+	.find-num, .find-date {
+		display: none;
+	}
+}

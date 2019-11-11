@@ -1,5 +1,6 @@
 package action;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,6 +24,8 @@ public class ReviewWriteProAction implements CommandAction {
 
 		// 파일 업로드
 		String path = request.getServletContext().getRealPath("/assets/review_img"); // 저장경로
+		// String path="http://106.10.39.121:8080/Review_Img/";
+		
 		// 업로드 위치
 		int maxSize = 1024 * 1024 * 50; // 50MB
 		String enc = "utf-8";
@@ -46,18 +49,18 @@ public class ReviewWriteProAction implements CommandAction {
 
 		String filepath = path + "/" + sysName;
 		System.out.println("filepath" + filepath);
-
+		
 		// 파일 업로드
 
 		ReviewDTO review = new ReviewDTO();
 
-//		review.setReview_title(request.getParameter("review_title"));
-//		review.setUser_nickname((String)session.getAttribute("email"));
-//		review.setReview_content(request.getParameter("review_content"));
-//		review.setReview_date(new Timestamp(System.currentTimeMillis()));
-//		review.setReview_place(request.getParameter("review_place"));
-//		review.setReview_img(request.getParameter("review_img"));
-//		review.setReview_like_count(0);
+		// review.setReview_title(request.getParameter("review_title"));
+		// review.setUser_nickname((String)session.getAttribute("email"));
+		// review.setReview_content(request.getParameter("review_content"));
+		// review.setReview_date(new Timestamp(System.currentTimeMillis()));
+		// review.setReview_place(request.getParameter("review_place"));
+		// review.setReview_img(request.getParameter("review_img"));
+		// review.setReview_like_count(0);
 
 		review.setReview_title(upload.getParameter("review_title"));
 		review.setUser_nickname((String) session.getAttribute("email"));

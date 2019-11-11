@@ -4,44 +4,43 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-	<title>그날, 우리의 제주</title>
-    <!-- Meta -->
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+<title>그날, 우리의 제주</title>
+   <!-- Meta -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <meta name="description" content="" />
+   <meta name="author" content="" />
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico" />
+   <!-- Favicon -->
+   <link rel="shortcut icon" href="favicon.ico" />
 
-    <!-- Web Fonts -->
-    <link rel='stylesheet' type='text/css' 
-    href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin' />
+   <!-- Web Fonts -->
+   <link rel='stylesheet' type='text/css' 
+   href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin' />
 
-    <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
+   <!-- CSS Global Compulsory -->
+   <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css" />
+   <link rel="stylesheet" href="assets/css/style.css" />
 
-    <!-- CSS Header and Footer -->
-    <link rel="stylesheet" href="assets/css/headers/header-default.css" />
-    <link rel="stylesheet" href="assets/css/footers/footer-v1.css" />
+   <!-- CSS Header and Footer -->
+   <link rel="stylesheet" href="assets/css/headers/header-default.css" />
+   <link rel="stylesheet" href="assets/css/footers/footer-v1.css" />
 
-    <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="assets/plugins/animate.css" />
-    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css" />
-    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="assets/plugins/fancybox/source/jquery.fancybox.css" />
-    <link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" />
-    <link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css" />
-    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css" />
-    <!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css" type="text/css" media="screen"><![endif]-->
+   <!-- CSS Implementing Plugins -->
+   <link rel="stylesheet" href="assets/plugins/animate.css" />
+   <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css" />
+   <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css" />
+   <link rel="stylesheet" href="assets/plugins/fancybox/source/jquery.fancybox.css" />
+   <link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" />
+   <link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings.css" type="text/css" media="screen" />
+   <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css" />
+   <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css" />
+   <!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css" type="text/css" media="screen"><![endif]-->
 
-    <!-- CSS Customization -->
-<link rel="stylesheet" href="assets/css/custom_notice.css" />
-    <link rel="stylesheet" href="assets/css/theme-colors/orange.css" />
+   <!-- CSS Customization -->
+   <link rel="stylesheet" href="assets/css/custom_notice.css" />
+   <link rel="stylesheet" href="assets/css/theme-colors/orange.css" />
 </head>
 
 <style>
@@ -61,50 +60,42 @@ margin-bottom: 50px;}
 
 <!-- 기본 페이지 이 아래로 합치면 됨 -->
 <!-- Contacts -->
-                <form action="noticeWritePro.do" method="post" id="sky-form3" class="sky-form">
+<form action="noticeWritePro.do" method="post" id="sky-form3" class="sky-form" enctype="multipart/form-data">
+ <fieldset>                  
+   <div class="notice-container"> 
+   <div class="headline"> <h2>공지사항 작성</h2> </div>
+    <section>
+     <label class="label">글제목</label>
+     <label class="input" >
+       <input type="text" name="notice_title" id="subject" value=""/>
+     </label>
+    </section>
+    <section>
+     <label class="label">글내용</label>
+     <label class="textarea" >
+       <textarea rows="4" name="notice_content" id="message"></textarea>
+     </label>
+    </section>
+    <section>
+     <label class="label">파일첨부</label>
+     <label for="file" class="input input-file">
+     <div class="button">
+      <input type="file" id="file" name="notice_file" onchange="valchange()" />Browse</div>
+      <input type="text" id="filename" readonly/>  
+      </label>
+    </section>      
 
-                    <fieldset>                  
-                      <div class="notice-container"> 
-                       <div class="headline"> <h2>공지사항 작성</h2> </div>
-                   
-                        <section>
-                            <label class="label">글제목</label>
-                            <label class="input" >
-                              
-                                <input type="text" name="notice_title" id="subject" value=""/>
-                            </label>
-                        </section>
-                        
-                        <section>
-                            <label class="label">글내용</label>
-                            <label class="textarea" >
-                              
-                                <textarea rows="4" name="notice_content" id="message"></textarea>
-                            </label>
-                        </section>
-                        
-                       <section>
-                            <label class="label">파일첨부</label>
-                            <label for="file" class="input input-file">
-                                <div class="button"><input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" readonly>
-                            </label>
-                        </section>                  
-                        
-                    <footer>
-                        
-                     <button type="button" class="button" onclick="window.history.back();">취소</button>
-                  <button type="submit" class="button">등록</button>
-                    </footer>
-            
-                     </div>
-                            </fieldset>
-                    <div class="message">
-                        <i class="rounded-x fa fa-check"></i>
-                        <p>등록되었습니다</p>
-                    </div>
-                </form>         
-                <!-- Contacts -->
-
+  <footer>
+   <button type="button" class="button" onclick="history.back();">취소</button>
+   <button type="submit" class="button">등록</button>
+  </footer>
+ </fieldset>
+     <div class="message">
+       <i class="rounded-x fa fa-check"></i>
+       <p>등록되었습니다</p>
+     </div>
+</form>         
+ <!-- Contacts -->
 
 <%@include file="../footer.jsp" %>
 </div><!--/wrapper-->
@@ -136,6 +127,10 @@ margin-bottom: 50px;}
         OwlCarousel.initOwlCarousel();
         RevolutionSlider.initRSfullWidth();
     });
+    
+    function valchange(){
+    	$('#filename').val($('#file').val())
+    }
 </script>
 <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

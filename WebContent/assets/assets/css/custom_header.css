@@ -1,0 +1,57 @@
+ul.dropdown-menu.top {
+    width: inherit;
+    font-size: 11px;
+    min-width: 60px;
+}
+.dropdown-menu.top li a {
+    width: inherit;
+    font-size: 11px;
+    min-width: 60px;
+    border: none;
+}
+.dropdown-menu.top>li>a {
+    padding: 3px 10px;
+    width: inherit;
+}
+.header .topbar ul.loginbar > li > a {
+    text-align: center;
+    color: #7c8082;
+    font-size: 11px;
+    min-width: 60px;
+    width: 60px;
+	
+}
+
+.header .dropdown.top > a:after {
+	right: 20px;
+    width: 10px;
+}
+
+.header .open > .dropdown-menu.top {
+    display: block;
+    font-size: 11px;
+    min-width: 60px;
+    width: 60px;
+    border-bottom: none;
+}
+
+/* 메인 스타일 */
+h3.title a {
+    color: #e67e22;
+    font-weight: bold;
+    font-size: 20px;
+}
+.insert-1 .title,
+.insert-2 .title,
+.insert-3 .title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+p.pboby {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}

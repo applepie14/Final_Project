@@ -9,6 +9,15 @@ public class NoticeDTO {
 	private int notice_count;  //조회수
 	private Timestamp notice_date;   //등록일
 	private String admin_id; //아이디
+	private String notice_file;
+	
+	
+	public String getNotice_file() {
+		return notice_file;
+	}
+	public void setNotice_file(String notice_file) {
+		this.notice_file = notice_file;
+	}
 	
 	public int getNotice_no() {
 		return notice_no;

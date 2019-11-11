@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -67,13 +68,13 @@
 				<!--/container-->
 
 				<!-- General Unify Forms -->
-				<form action="#" class="sky-form">
+				<form method="post" action="findWritePro.do" class="sky-form">
 				
 					<!-- 동행구하기 글 제목 -->
 					<fieldset>
 						<section>
 							<label class="label">제목</label>
-							<label class="input"> <input type="text"></label> 
+							<label class="input"> <input type="text" name="company_title" id="company_title"></label> 
 						</section>
 					</fieldset>
 				
@@ -83,10 +84,10 @@
 						<label class="label">여행기간</label>
 						<div class="row">
 							<section class="col col-6"> <label class="input">
-								<i class="icon-append fa fa-calendar"></i> <input type="text" name="start" id="start" placeholder="여행 시작일">
+								<i class="icon-append fa fa-calendar"></i> <input type="text" name="company_startdate" id="start" placeholder="여행 시작일">
 							</section>
 							<section class="col col-6"> <label class="input">
-								<i class="icon-append fa fa-calendar"></i> <input type="text" name="finish" id="finish" placeholder="여행 종료일">
+								<i class="icon-append fa fa-calendar"></i> <input type="text" name="company_enddate" id="finish" placeholder="여행 종료일">
 							</section>
 						</div>
 						</section>
@@ -94,32 +95,32 @@
 
 					<!-- 여행테마 선택(중복선택X) -->
 					<fieldset>
-						<section> 
+						<section id="theme"> 
 							<label class="label">여행테마</label> 
                             <div class="row">
                                 <div class="col col-4">
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>나홀로<br>
+                                    <label class="radio"><input type="radio" name="company_theme" value="나홀로"><i class="rounded-x"></i>나홀로<br>
                                     <img src="https://i.ibb.co/HPYb6g5/alone.jpg" height="80px"></img>
                                     </label>
                                     <p>
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>가족<br>
+                                    <label class="radio"><input type="radio" name="company_theme" value="가족"><i class="rounded-x"></i>가족<br>
                                     <img src="https://i.ibb.co/LhmNsf2/family.jpg" height="80px"></img>
                                     </label>                        
                                 </div>
                                 <div class="col col-4">
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>커플<br>
+                                    <label class="radio"><input type="radio" name="company_theme" value="커플"><i class="rounded-x"></i>커플<br>
                                     <img src="https://i.ibb.co/JtMSJcR/couple.jpg" height="80px"></img>
                                     </label>
                                     <p>
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>단체<br>
+                                    <label class="radio"><input type="radio" name="company_theme" value="단체"><i class="rounded-x"></i>단체<br>
                                     <img src="https://i.ibb.co/5Yp2xtr/group.jpg" height="80px"></img>
                                     </label>
                                 </div>
                                 <div class="col col-4">                              
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>친구<br>
+                                    <label class="radio"><input type="radio" name="company_theme" value="친구"><i class="rounded-x"></i>친구<br>
                                     <img src="https://i.ibb.co/zmjxWFn/friend.jpg" height="80px"></img>
                                     </label>
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>비지니스<br>
+                                    <label class="radio"><input type="radio" name="company_theme" value="비지니스"><i class="rounded-x"></i>비지니스<br>
                                     <img src="https://i.ibb.co/gSF5w44/business.jpg" height="80px"></img>
                                     </label>
                                 </div>
@@ -134,17 +135,17 @@
 							<label class="label">관심태그</label> 
 							<div class="row">
                                 <div class="col col-4">
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>식도락</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>취미</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>명소</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=3><i></i>식도락</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=6><i></i>취미</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=9><i></i>명소</label>
                                 </div>
                                 <div class="col col-4">
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>액티비티</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>쇼핑</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=4><i></i>액티비티</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=7><i></i>쇼핑</label>
                                 </div>
                                 <div class="col col-4">
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>휴양</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>공연, 예술</label>                                 
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=5><i></i>휴양</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=8><i></i>공연, 예술</label>                                 
                                 </div>
                             </div>
 						</section>
@@ -152,12 +153,12 @@
 					
 					<!-- 동행모집 선택(중복선택X) -->
 					<fieldset>
-						<section> 
+						<section id="gender"> 
 							<label class="label">동행모집</label> 
 							 <div class="inline-group">
-                                <label class="radio"><input type="radio" name="radio-inline" checked><i class="rounded-x"></i>남</label>
-                                <label class="radio"><input type="radio" name="radio-inline"><i class="rounded-x"></i>여</label>
-                                <label class="radio"><input type="radio" name="radio-inline"><i class="rounded-x"></i>상관없음</label>
+                                <label class="radio"><input type="radio" name="company_gender" value="M"><i class="rounded-x"></i>남</label>
+                                <label class="radio"><input type="radio" name="company_gender" value="W"><i class="rounded-x"></i>여</label>
+                                <label class="radio"><input type="radio" name="company_gender" value="N"><i class="rounded-x"></i>상관없음</label>
                             </div>
 						</section>
 					</fieldset>
@@ -166,14 +167,16 @@
 					<fieldset>
 						<section> 
 							<label class="label">내용 입력</label> 
-							<label class="textarea"><textarea rows="5"></textarea></label>
+							<label class="textarea">
+								<textarea rows="5" name="company_content" id="company_content"></textarea>
+							</label>
 							<div class="note"></div>
 						</section>
 					</fieldset>
 
 					<footer>
-						<button type="submit" class="btn-u">등록</button>
-						<button type="button" class="btn-u btn-u-default" onclick="location.href='Find_List.jsp'">취소</button>
+						<button type="button" class="btn-u" onclick="findCheck()">등록</button>
+						<button type="button" class="btn-u btn-u-default" onclick="window.location='findList.do'">취소</button>
 					</footer>
 				</form>
 				</center>
@@ -197,7 +200,7 @@
 	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
 	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 	<!-- JS Customization -->
-	<script type="text/javascript" src="assets/js/custom.js"></script>
+<script type="text/javascript" src="assets/js/custom_find.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="assets/js/app.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/masking.js"></script>

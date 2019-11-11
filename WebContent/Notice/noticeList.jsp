@@ -89,7 +89,9 @@ input.searchbutton.btn-u {
     <div class="breadcrumbs">
         <div class="container">
    	 		<ul class="pull-right breadcrumb">
+   	 		       <c:if test="${name != null && name =='관리자'}" >
         		<li><a href="noticeWrite.do">공지 작성</a></li>
+        		</c:if>
    			</ul>
         </div><!--/container-->
     </div>
@@ -159,26 +161,6 @@ input.searchbutton.btn-u {
     <input class="searchbutton btn-u" type="submit" value="검색">
 </form><p>
         
-
-
-
-	<!-- Pagination -->
-	<!-- <div class="text-center md-margin-bottom-30">
-		<ul class="pagination">
-			<li><a href="#">«</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li class="active"><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">»</a></li>
-		</ul>
-	</div> -->
-	
-	
-	
-	
-	
 	<!-- 페이징 처리 -->
 <div class="pagination1">
   <ul class="pagination">
@@ -190,14 +172,20 @@ input.searchbutton.btn-u {
 
   <li>
 	<c:forEach var="i" begin="${pgList.startPage}"  end="${pgList.endPage}">
-    <a href="noticeList.do?pageNum=${i}&search=${search}&searchtext=${searchtext}" class="paging_now">
-    <c:if test="${pgList.currentPage==i }">
-    <font class="sel"><b>${i }</b></font>
-    </c:if>
-
+   <c:if test="${pgList.currentPage==i }">
+              <li class="active">
+    <a href="noticeList.do?pageNum=${i}&search=${search}&searchtext=${searchtext}" class="paging_now active" >
+       <font>${i }</font>
+       </a>
+       </li>
+       </c:if>
 
     <c:if test="${pgList.currentPage!=i }">
+     <li class="">
+                 <a href="noticeList.do?pageNum=${i }&search=${search}&searchtext=${searchtext}" class="paging_now active">
     <font><b>${i }</b></font>
+    </a>
+    </li>
     </c:if>
     </a>	
     </c:forEach>

@@ -65,18 +65,21 @@
 
 
 	<!-- 기본 페이지 이 아래로 합치면 됨 -->
+	<form action="planWritePro.do" class="sky-form"  method="post" id="sky-form" >
 	<!--=== Content Part ===-->
 	<div class="container content">
 		<div class="row">
 			<!-- Begin Content -->
 			<div class="col-md-12">
 				<!-- General Unify Forms -->
-				<form action="#" class="sky-form">
+				
 					<header>일정 작성하기</header>
 
 					<fieldset>
 						<section> <label class="label">일정 제목</label> <label
-							class="input"> <input type="text">
+							class="input"> 
+							
+							<input class="plansubject" name="plan_title" type="text" size="50px" id="plan_title">
 						</label> </section>
 					</fieldset>
 
@@ -85,28 +88,28 @@
 							<label class="label">여행테마</label> 
                             <div class="row">
                                 <div class="col col-ss-4 col-4">
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>나홀로<br>
+                                    <label class="radio"><input type="radio" name="theme" value="나홀로"><i class="rounded-x"></i>나홀로<br>
                                     <img src="https://i.ibb.co/HPYb6g5/alone.jpg" height="80px"></img>
                                     </label>
                                     <p>
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>가족<br>
+                                    <label class="radio"><input type="radio" name="theme" value="가족"><i class="rounded-x"></i>가족<br>
                                     <img src="https://i.ibb.co/LhmNsf2/family.jpg" height="80px"></img>
                                     </label>                        
                                 </div>
                                 <div class="col col-ss-4 col-4">
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>커플<br>
+                                    <label class="radio"><input type="radio" name="theme" value="커플"><i class="rounded-x"></i>커플<br>
                                     <img src="https://i.ibb.co/JtMSJcR/couple.jpg" height="80px"></img>
                                     </label>
                                     <p>
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>단체<br>
+                                    <label class="radio"><input type="radio" name="theme" value="단체"><i class="rounded-x"></i>단체<br>
                                     <img src="https://i.ibb.co/5Yp2xtr/group.jpg" height="80px"></img>
                                     </label>
                                 </div>
                                 <div class="col col-ss-4 col-4">                              
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>친구<br>
+                                    <label class="radio"><input type="radio" name="theme" value="친구"><i class="rounded-x"></i>친구<br>
                                     <img src="https://i.ibb.co/zmjxWFn/friend.jpg" height="80px"></img>
                                     </label>
-                                    <label class="radio"><input type="radio" name="radio"><i class="rounded-x"></i>비지니스<br>
+                                    <label class="radio"><input type="radio" name="theme" value="비즈니스"><i class="rounded-x"></i>비지니스<br>
                                     <img src="https://i.ibb.co/gSF5w44/business.jpg" height="80px"></img>
                                     </label>
                                 </div>
@@ -118,17 +121,17 @@
 							<label class="label">관심태그</label> 
 							<div class="row">
                                 <div class="col col-ss-4 col-4">
-                                    <label class="checkbox"><input type="checkbox" name="eat"><i></i>식도락</label>
-                                    <label class="checkbox"><input type="checkbox" name="hobby"><i></i>취미</label>
-                                    <label class="checkbox"><input type="checkbox" name="place"><i></i>명소</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=3><i></i>식도락</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=6><i></i>취미</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=9><i></i>명소</label>
                                 </div>
                                 <div class="col col-ss-4 col-4">
-                                    <label class="checkbox"><input type="checkbox" name="activity"><i></i>액티비티</label>
-                                    <label class="checkbox"><input type="checkbox" name="shopping"><i></i>쇼핑</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=4><i></i>액티비티</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=7><i></i>쇼핑</label>
                                 </div>
                                 <div class="col col-ss-4 col-4">
-                                    <label class="checkbox"><input type="checkbox" name="relex"><i></i>휴양</label>
-                                    <label class="checkbox"><input type="checkbox" name="art"><i></i>공연, 예술</label>                                 
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=5><i></i>휴양</label>
+                                    <label class="checkbox"><input type="checkbox" name="tags" value=8><i></i>공연, 예술</label>                                 
                                 </div>
                             </div>
 						</section>
@@ -138,35 +141,36 @@
 						
 						<div class="inline-group">
 							<label class="radio"><input type="radio"
-								name="radio-inline" checked><i class="rounded-x"></i>남</label> 
-								<label class="radio"><input type="radio" name="radio-inline">
+								name="gender" value="M" ><i class="rounded-x"></i>남</label> 
+								<label class="radio"><input type="radio" name="gender"  value="F" >
 								<i class="rounded-x"></i>여</label> <label class="radio">
-								<input type="radio" name="radio-inline"><i class="rounded-x"></i>상관없음</label>
+								<input type="radio" name="gender" value="N" ><i class="rounded-x"></i>상관없음</label>
 
 						</div>
 						
 						
 						</section>
 						<div class="row">
-
+							
 							<section class="col col-5">
-								<label>출발일</label>
+								<label class="label">출발일</label>
 	                            <label class="input">
 		                            <i class="icon-append fa fa-calendar"></i>
-		                            <input type="text" name="date" id="date" placeholder="Start date">
+		                           <input type="text" name="date" id="start" placeholder="date" >
+		                            
 	                            </label>
                             </section>
 	
 							<section class="col col-ss-3 col-3"> 
-								<label>여행기간</label>                    
-								<br/>
-                                <input class="input1" type="text"  size="1px"/>일
+								<label class="label2">여행기간</label>
+								<br/>                       
+                                <input class="input1" type="text"  size="1px" name="day" value=0>일
 							</section>
                                                 
                             <section class="col col-ss-3 col-4">
-								<label>모집인원</label>                    
-								<br/>
-                                <input class="input1" type="text"  size="1px"/>명
+								<label class="label2">모집인원</label>
+								<br/>                    
+                                <input class="input1" type="text"  size="1px" name="p" value=0>명
                             </section>
 						</div>
 						
@@ -175,15 +179,16 @@
 					<fieldset>
 						<div class="row">
 
-							<section class="col col-5"> <label class="toggle"><input
-								type="checkbox" name="checkbox-toggle" checked><i
-								class="rounded-4x"></i>비공개</label> </section>
+							<section class="col col-5"> <label class="toggle">
+							<input type="checkbox" name="plan_public" value="off">
+							<i class="rounded-4x"></i>비공개</label> </section>
 
-							<section class="col col-5"> <label class="toggle"><input
-								type="checkbox" name="checkbox-toggle" checked><i
-								class="rounded-4x"></i>임시저장</label> </section>
+							<section class="col col-5"> <label class="toggle">
+							<input type="checkbox" name="plan_save"  value="on" checked>
+								<i class="rounded-4x"></i>임시저장</label> </section>
 						</div>
 				</div>
+				
 				</div>
 			
 			
@@ -240,7 +245,7 @@
 
 			<!-- General Unify Forms -->
 							<div class="col-md-5">	
-									<div id="map" style="width: 100%; height: 400px;"></div>
+									<div id="map" style="width: 400px; height: 400px;"></div>
 									<script type="text/javascript"
 										src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4b584c100fe1ae5b627bb263ca582ac0"></script>
 									<script>
@@ -284,10 +289,11 @@
 						
 					</fieldset>
 			
-		</form>
+	
 		</br>
 
 		</div>
+		
 		<!-- End Content -->
 	</div>
 	<!--/container-->
@@ -295,7 +301,8 @@
 		<button class="btn-u" type="submit">완료</button>
 		<button class="btn-u btn-u-default" onclick="history.back();">취소</button>
 	</div>
-	</div>
+	</form>
+	
 	<!--=== End Content Part ===-->
 
 					<%@include file="../footer.jsp"%>

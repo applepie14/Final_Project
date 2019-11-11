@@ -1,5 +1,6 @@
 package jeju.find;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class FindDTO {
@@ -8,12 +9,13 @@ public class FindDTO {
 	private String company_title;
 	private String company_content;
 	private int company_count;
-	private Date company_startdate;
-	private Date company_enddate;
+	private String company_startdate;
+	private String company_enddate;
 	private String company_gender;
 	private String company_theme;
 	private Date company_date;
 	private String user_nickname;
+	private ArrayList<String> tags;
 	
 	public int getCompany_no() {
 		return company_no;
@@ -55,19 +57,19 @@ public class FindDTO {
 		this.company_count = company_count;
 	}
 
-	public Date getCompany_startdate() {
+	public String getCompany_startdate() {
 		return company_startdate;
 	}
 
-	public void setCompany_startdate(Date company_startdate) {
+	public void setCompany_startdate(String company_startdate) {
 		this.company_startdate = company_startdate;
 	}
 
-	public Date getCompany_enddate() {
+	public String getCompany_enddate() {
 		return company_enddate;
 	}
 
-	public void setCompany_enddate(Date company_enddate) {
+	public void setCompany_enddate(String company_enddate) {
 		this.company_enddate = company_enddate;
 	}
 
@@ -101,6 +103,15 @@ public class FindDTO {
 	
 	public void setUser_nickname(String user_nickname) {
 		this.user_nickname=user_nickname;
+	}
+
+	// 태
+	public ArrayList<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(ArrayList<String> tags) {
+		this.tags = tags;
 	}
 
 }

@@ -268,16 +268,15 @@
     			return false;
     	    }
     	})
-    		
-    	$("#user_password").keyup(function(){
+
+		$("#user_password").keyup(function(){
     		var regex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/; // 표현식
+    		var regex2 = /[!@#$%^&+=]/; 
     		if (!regex.test($("#user_password").val())) { // test 메소드 : 특정한 필드에 입력한 값에
     														// 대한 유효성을 검사
     			$('#pw .error').text("비밀번호는 문자, 숫자, 특수문자 포함 8자리 이상입니다.");
     			$("#user_password").focus();
     			return false;
-    		} else {
-    			return true;
     		}
     	})
     	

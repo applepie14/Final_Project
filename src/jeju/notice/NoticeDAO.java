@@ -265,6 +265,7 @@ private NoticeDTO makeNoticeFromResult() throws Exception{
 	article.setNotice_content(rs.getString("notice_content"));
 	article.setNotice_count(rs.getInt("notice_count"));
 	article.setNotice_date(rs.getTimestamp("notice_date"));
+	article.setNotice_file(rs.getString("notice_file"));
 	article.setAdmin_id(rs.getString("admin_id"));
 	return article ;
 }
@@ -272,9 +273,6 @@ private NoticeDTO makeNoticeFromResult() throws Exception{
 //----------게시판의 글쓰기 및 글 답변달기-----------------------------
 public void insertArticle(NoticeDTO article) { //~(MemberDTO mem)
 	
-
-	//테이블에 입력할 게시물 번호를 저장할 변수
-		/* int num=article.getNotice_no(); */
 		int number=0; 
 	try {
 		conn=pool.getConnection();
@@ -288,12 +286,13 @@ public void insertArticle(NoticeDTO article) { //~(MemberDTO mem)
 		}
 		
 		//12개->,reg_date,reacount(생략)->default->sysdate,now()<-mysql (?대신에)
-		sql="insert into Notice(Notice_Title,Notice_Content,Notice_Date) values(?,?,?)";
+		sql="insert into Notice(Notice_Title,Notice_Content,Notice_Date,Notice_File) values(?,?,?,?)";
 		pstmt=conn.prepareStatement(sql);
 		
 		pstmt.setString(1, article.getNotice_title());
 		pstmt.setString(2, article.getNotice_content());
 		pstmt.setTimestamp(3, article.getNotice_date());
+		pstmt.setString(4, article.getNotice_file());
 		
 		int insert=pstmt.executeUpdate();
 		
@@ -349,6 +348,7 @@ public void insertArticle(NoticeDTO article) { //~(MemberDTO mem)
 			article.setNotice_content(rs.getString("notice_content"));
 			article.setNotice_count(rs.getInt("notice_count"));
 			article.setNotice_date(rs.getTimestamp("notice_date"));
+			article.setNotice_file(rs.getString("notice_file"));
 			article.setAdmin_id(rs.getString("admin_id"));//default->0
 			return article;
 		}
@@ -367,21 +367,6 @@ public void insertArticle(NoticeDTO article) { //~(MemberDTO mem)
 		//글목록보기
 		if(rs.next()) {//레코드가 최소 만족 1개이상 존재한다면
 			   article=makeNoticeFromResult();
-			   /*
-			    article=new BoardDTO();//MemberDTO~
-				article.setNum(rs.getInt("num"));
-				article.setWriter(rs.getString("writer"));
-				article.setEmail(rs.getString("email"));
-				article.setSubject(rs.getString("subject"));
-				article.setPasswd(rs.getString("passwd"));
-				article.setReg_date(rs.getTimestamp("reg_date"));//오늘날짜->코딩 ->now()
-				article.setReadcount(rs.getInt("readcount"));//default->0
-				article.setRef(rs.getInt("ref"));//그룹번호->신규글과 답변글 묶어주는 역할
-				article.setRe_step(rs.getInt("re_step"));//답변글이 나오는 순서(0,1,2,3,,오름차순)
-				article.setRe_level(rs.getInt("re_level"));//들여쓰기(답변의 깊이)
-				article.setContent(rs.getString("content"));//글내용
-				article.setIp(rs.getString("ip"));//글쓴이의 ip주소
-				*/
 		}
 	}catch(Exception e) {
 		System.out.println("updateGetArticle() 메서드 에러유발"+e);
@@ -392,22 +377,21 @@ public void insertArticle(NoticeDTO article) { //~(MemberDTO mem)
 }
 
  // 공지 수정
-public int updateArticle(String title, String content, int notice_no) { //~(MemberDTO mem)
+public int updateArticle(String title, String content, String notice_file, int notice_no) { //~(MemberDTO mem)
 	//테이블에 입력할 게시물 번호를 저장할 변수
-		/* int num=article.getNotice_no(); */
 		int update=0; 
 	try {
 		conn=pool.getConnection();
-		//12개->,reg_date,reacount(생략)->default->sysdate,now()<-mysql (?대신에)
 		sql="UPDATE Notice " + 
 				"SET Notice_Title=? " + 
 				", Notice_Content=? " +
+				", Notice_File=? " +
 				"WHERE Notice_No=?";
 		pstmt=conn.prepareStatement(sql);
-		
 		pstmt.setString(1, title);
 		pstmt.setString(2, content);
-		pstmt.setInt(3, notice_no);
+		pstmt.setString(3, notice_file);
+		pstmt.setInt(4, notice_no);
 		
 		update=pstmt.executeUpdate();
 		

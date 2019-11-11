@@ -75,7 +75,7 @@ ol, ul {
     background: rgba(255,255,255,.9);
     padding-bottom: 100px;
 }
-.breadcrumbs-v1-list-2 h1 {
+.breadcrumbs-v1-list.breadcrumbs-v1-list2  h1 {
     font-size: 50px;
     line-height: 35px;
     color:gray;
@@ -83,7 +83,17 @@ ol, ul {
 span {color:gray;
       font-size:24px;}
 
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    height: auto;
+    padding-top: 70px;
+    padding-bottom: 50px;
+    width: 600px;
+}
 
+.detail-p {
+    margin-top: 50px;
+    margin-bottom: 0px;
+}
 </style>
 </head>
 <body>    
@@ -92,71 +102,56 @@ span {color:gray;
 <!-- 기본 페이지 이 아래로 합치면 됨 -->
 
 <!--=== Breadcrumbs v1 ===-->
-  <form method="post" id="sky-form3" class="sky-form">
-	<div class="breadcrumbs-v1-list-2">
-		<div class="container">
-			<span>Notic Detail</span>
-			<h1>공지사항</h1>
-		</div>
+ <form method="post" id="sky-form3" class="sky-form">
+<div class="breadcrumbs-v1-list breadcrumbs-v1-list2">
+	<div class="container">
+		<span>Notic Detail</span>
+		<h1>공지사항</h1>
 	</div>
-	<!--=== End Breadcrumbs v1 ===-->
+</div>
+<!--=== End Breadcrumbs v1 ===-->
 
-   <fieldset>
-	<div class="notice-container">
-		<div class="row">
-			<div class="col-md-12 mb-3">
-				<div class="headline"><h2>공지사항</h2>
-				<!--Table Bordered-->
-			<ul class="pull-right breadcrumb">
-        		<li><a href="noticeModify.do?notice_no=${article.notice_no}">수정</a></li>
-        		<li><a a onclick="return confirm('정말로 삭제하시겠습니까?')" 
-                                 href="noticeDeletePro.do?notice_no=${article.notice_no}&pageNum=${pgList.startPage-pgList.blockSize}">삭제</a></li>
-        		
-   			</ul>
-				</div>
-			</div>
+  <fieldset>
+<div class="notice-container">
+ <div class="row">
+	<div class="col-md-12 mb-3">
+		<div class="headline"><h2>공지사항</h2>
+		<!--Table Bordered-->
+	<ul class="pull-right breadcrumb">
+	       <c:if test="${name != null && name =='관리자'}" >
+      <li><a href="noticeModify.do?notice_no=${article.notice_no}">수정</a></li>		
+      <li><a a onclick="return confirm('정말로 삭제하시겠습니까?')" 
+          href="noticeDeletePro.do?notice_no=${article.notice_no}&pageNum=${pgList.startPage-pgList.blockSize}">삭제</a></li>
+          </c:if>
+      
+
+ 	</ul>
+	   </div>
 	</div>
-	
-	<!-- <div class="blog margin-bottom-40"> -->
-           
-        	<h2>${article.notice_title}</h2>
-            <div class="blog-post-tags">
-                 <ul class="list-unstyled list-inline blog-info" >
-                    <li><i class="fa fa-calendar"></i>${article.notice_date }</li>   
-                    <li><i class="fa fa-comments-o"></i>조회수</li>
-                    <li>${article.notice_count}</li>
-                </ul>                    
-            </div>
-            <p class="detail-p">${article.notice_content}</p>
-		
-		
+</div>
 
-	  <button type="button" class="btn-u pull-right" onclick="window.history.back();">목록</button>
+  
+ <h2>${article.notice_title}</h2>
+   <div class="blog-post-tags">
+        <ul class="list-unstyled list-inline blog-info" >
+           <li><i class="fa fa-calendar"></i>${article.notice_date }</li>   
+           <li><i class="fa fa-comments-o"></i>조회수</li>
+         <%--   <li>${article.notice_count}</li> --%>
+       </ul>
+         <p class="detail-p">${article.notice_content}</p>      
+       <p style="text-align:center">           
+        <img class="img-responsive" src="assets/notice_upload/${article.notice_file}" alt=""/>   
+       </p>
+   </div>
 
-	</div> 
- </fieldset>
+   
+   
+  <button type="button" class="btn-u pull-right" onclick="location='noticeList.do'">목록</button>
+
+</div> 
+</fieldset>
 
 </form>
-
- <!--=== Content Part ===-->
--<!--      <div class="container content blog-full-width">		
-          
-    	<div class="blog margin-bottom-40">
-           
-        	<h2><a href="blog_item_option1.html">공지사항입니다!</a></h2>
-            <div class="blog-post-tags">
-                <ul class="list-unstyled list-inline blog-info">
-                    <li><i class="fa fa-calendar"></i> September 02, 2019</li>
-                    <li><i class="fa fa-pencil"></i>관리자</li>
-                   
-                </ul>                    
-            </div>
-            <p>공지사항 내용</p>
-         
-        </div> 
-
-         </div> -->
-    <!--=== End Content Part ===-->
 
 
 	<%@include file="../footer.jsp"%>
@@ -211,4 +206,3 @@ span {color:gray;
 
 </body>
 </html>
-    

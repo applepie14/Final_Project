@@ -7,19 +7,29 @@ public class PlanDTO {
 	private String plan_title;
 	private String plan_content;
 	private int plan_count;
-	private Date plan_startdate;
-	private String plan_period;
+	private String plan_startdate;
+	private int plan_period;
 	private String plan_gender;
 	private String plan_theme;
-	private int plan_date;
+	private Date plan_date;
 	private String plan_save;
 	private String plan_public;
 	private int plan_like_count;
 	private String user_nickname;
+	
 	//private int plantag_tagno;
 	//private int plantag_planno;
 	//private String tag_tag;
+	//private String [] tags;
+	private int plan_nop;
+
 	
+	public int getPlan_nop() {
+		return plan_nop;
+	}
+	public void setPlan_nop(int plan_nop) {
+		this.plan_nop = plan_nop;
+	}
 	public String getUser_nickname() {
 		return user_nickname;
 	}
@@ -58,16 +68,16 @@ public class PlanDTO {
 		this.plan_count = plan_count;
 	}
 
-	public Date getPlan_startdate() {
+	public String getPlan_startdate() {
 		return plan_startdate;
 	}
-	public void setPlan_startdate(Date plan_startdate) {
+	public void setPlan_startdate(String plan_startdate) {
 		this.plan_startdate = plan_startdate;
 	}
-	public String getPlan_period() {
+	public int getPlan_period() {
 		return plan_period;
 	}
-	public void setPlan_period(String plan_period) {
+	public void setPlan_period(int plan_period) {
 		this.plan_period = plan_period;
 	}
 	public String getPlan_gender() {
@@ -82,10 +92,10 @@ public class PlanDTO {
 	public void setPlan_theme(String plan_theme) {
 		this.plan_theme = plan_theme;
 	}
-	public int getPlan_date() {
+	public Date getPlan_date() {
 		return plan_date;
 	}
-	public void setPlan_date(int  plan_date) {
+	public void setPlan_date(Date  plan_date) {
 		this.plan_date = plan_date;
 	}
 
@@ -126,6 +136,13 @@ public class PlanDTO {
 	public void setTag_tag(String tag_tag) {
 		this.tag_tag = tag_tag;
 	}
-*/	
-	
+*/
+	/*
+	 * public String getTag_tag() { return tag_tag; } public void setTag_tag(String
+	 * tag_tag) { this.tag_tag = tag_tag; }
+	 */
+	/*
+	 * public String[] getTags() { return tags; } public void setTags(String[] tags)
+	 * { this.tags = tags; }
+	 */
 }

@@ -67,7 +67,8 @@
 				<!--/container-->
 
 				<!-- General Unify Forms -->
-				<form method="post" action="reviewUpdatePro.do?review_no=${review.review_no }" class="sky-form">
+				<form method="post" enctype = "multipart/form-data" action="reviewUpdatePro.do?review_no=${review.review_no }" class="sky-form">
+					<input type="hidden" name="existing_file" value="${review.review_img }" />
 					<fieldset>
 						<section> 
 							<label class="label">리뷰 제목</label> 
@@ -81,9 +82,11 @@
 							<label class="label">사진 등록</label> 
 							<label for="file" class="input input-file">
 								<div class="button">
-									<input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
+									<input type="file" name="review_img" id="file" class="file"
+										   onchange="value2(); $('#filename').val(this.value.replace(/c:\\fakepath\\/i,'')) "
+										   accept="image/*" />Blowse
 								</div> 
-								<input type="text" readonly>
+								<input type="text" id="filename" class="filename" value="${review.review_img}"readonly />
 							</label> 
 						</section>
 					</fieldset>
@@ -101,6 +104,7 @@
 					<footer>
 					<button type="submit" class="btn-u">수정</button>
 					<button type="button" class="btn-u btn-u-default" onclick="location.href='review.do'">취소</button>
+					
 					</footer>
 				</form>
 				</center>
@@ -140,6 +144,10 @@
 			OwlCarousel.initOwlCarousel();
 			RevolutionSlider.initRSfullWidth();
 		});
+		
+		function value2(){
+			$("#filename").val($("#file").val())
+		}
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

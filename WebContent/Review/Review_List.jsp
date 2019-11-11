@@ -61,18 +61,23 @@
         </div>
         <!--/container-->
     </div>
-    <!--/breadcrumbs-->
-    <div class="breadcrumbs">
-        <div class="container">
-   	 		<ul class="pull-right breadcrumb">
-        		<li><a href="reviewWrite.do">리뷰 작성</a></li>
-   			</ul>
-        </div><!--/container-->
-    </div>
+		<c:if test="${name != null && name != '관리자'}">
+			<!--/breadcrumbs-->
+			<div class="breadcrumbs">
+				<div class="container">
+					<ul class="pull-right breadcrumb">
+						<li><a href="reviewWrite.do">리뷰 작성</a></li>
+					</ul>
+				</div>
+				<!--/container-->
+			</div>
+		</c:if>
 
-    <!--=== End Breadcrumbs ===-->
+		<!--=== End Breadcrumbs ===-->
 
     <!--=== Content Part ===-->
+    <!-- <img class="img-responsive" src="assets/review_img/${review.review_img}" alt=""> -->
+    <!-- <img class="img-responsive" src="http://106.10.39.121:8080/Review_Img/${review.review_img}" alt=""> -->
 		<div class="blog_masonry_3col">
 			<div class="container content grid-boxes">
 				<c:forEach var="review" items="${reviewList }">
@@ -81,7 +86,7 @@
 						<div class="grid-boxes-caption">
 							<ul class="pull-right list-inline grid-boxes-news modify">
 								<c:if test ="${review.user_nickname == name }">
-									<li><a href="">수정</a></li>
+									<li><a href="reviewUpdate.do?review_no=${review.review_no }">수정</a></li>
 									<li>|</li>
 									<!-- <li><a href="javascript:void(0);" onclick="deleteCheck();">삭제</a></li> -->
 									<li><a onclick="return confirm('정말로 삭제하시겠습니까?')" 
@@ -121,8 +126,8 @@
 						<option value="User_Nickname">작성자</option>
 					</select>
 					&nbsp;
-					<input type="text" class="searchtext" size="15" name="searchtext" placeholder="&nbsp;검색어를 입력하세요" >&nbsp;
-					<input class="searchbutton btn-u" type="submit" value="검색">
+					<input type="text" class="searchtext" size="15" name="searchtext" placeholder="&nbsp;검색어를 입력하세요" />&nbsp;
+					<input class="searchbutton btn-u" type="submit" value="검색"/>
 			</form><p>
 			<!--/container-->
 			

@@ -134,23 +134,23 @@ hr {
 							<label class="label">여행테마</label> 
                             <div class="row">
                                 <div class="col col-ss-4 col-4">
-                                    <label class="radio" ><input type="radio" name="theme" id="alone" ><i class="rounded-x"></i>나홀로<br>
+                                    <label class="radio" ><input type="radio" name="theme" value="나홀로" ><i class="rounded-x"></i>나홀로<br>
                                     </label>
                                     <p>
-                                    <label class="radio" ><input type="radio" name="theme" id="family"><i class="rounded-x"></i>가족<br>
+                                    <label class="radio" ><input type="radio" name="theme" value="가족"><i class="rounded-x"></i>가족<br>
                                     </label>                        
                                 </div>
                                 <div class="col col-ss-4 col-4">
-                                    <label class="radio" ><input type="radio" name="theme" id="couple"><i class="rounded-x"></i>커플<br>
+                                    <label class="radio" ><input type="radio" name="theme" value="커플"><i class="rounded-x"></i>커플<br>
                                     </label>
                                     <p>
-                                    <label class="radio" ><input type="radio" name="theme" id="group"><i class="rounded-x"></i>단체<br>
+                                    <label class="radio" ><input type="radio" name="theme" value="단체"></input><i class="rounded-x"></i>단체<br>
                                     </label>
                                 </div>
                                 <div class="col col-ss-4 col-4">                              
-                                    <label class="radio" ><input type="radio" name="theme" id="friend"><i class="rounded-x"></i>친구<br>
+                                    <label class="radio" ><input type="radio" name="theme" value="친구"><i class="rounded-x"></i>친구<br>
                                     </label>
-                                    <label class="radio" ><input type="radio" name="theme" id="Business"><i class="rounded-x"></i>비지니스<br>
+                                    <label class="radio" ><input type="radio" name="theme"  value="비즈니스"><i class="rounded-x"></i>비지니스<br>
 
                                     </label>
                                 </div>
@@ -183,10 +183,10 @@ hr {
 						
 						<div class="inline-group">
 							<label class="radio"><input type="radio"
-								name="gender"><i class="rounded-x"></i>남</label> 
-								<label class="radio"><input type="radio" name="gender" >
+								name="gender" value="M" ><i class="rounded-x"></i>남</label> 
+								<label class="radio"><input type="radio" name="gender"  value="F" >
 								<i class="rounded-x"></i>여</label> <label class="radio">
-								<input type="radio" name="gender" ><i class="rounded-x"></i>상관없음</label>
+								<input type="radio" name="gender" value="N"  ><i class="rounded-x"></i>상관없음</label>
 
 						</div>
 						
@@ -198,7 +198,7 @@ hr {
 								<label class="label">출발일</label>
 	                            <label class="input">
 		                            <i class="icon-append fa fa-calendar"></i>
-		                            <input type="text" name="date" id="date" placeholder="Start date">
+		                            <input type="text" name="date" id="start" placeholder="date" >
 	                            </label>
                             </section>
 	
@@ -250,27 +250,30 @@ hr {
 	    <tbody>
 	    <table class="table"> 
 	    <c:if test="${pgList.count==0 }">
-	    
 	       <tr>
 	         <td align="center">게시판에 저장된 글이 없습니다.</td>
 			</tr>
 		</table>
+		
 		</c:if>
 		<c:set var="number" value="${pgList.number }" />
 		 <c:if test="${pgList.count!=0 }">
 		<c:forEach var="plan" items="${planList}">
-	      <tr onclick="location.href='planDetail.do'" style="cursor:pointer;">
+	      <tr onclick="location.href='planDetail.do?plan_no=${plan.plan_no}'" style="cursor:pointer;">
 	    	<td>${number}</td>
 	    	
 	    	<c:set var="number" value="${number-1}" />
-	    	<<td><!-- 여행기간 -->
+	    	<td><!-- 여행기간 -->
 				<span class="Liststart">${plan.plan_startdate }</span>
 				<span class="Listend">${plan.plan_period }</span>
 			</td>
 								
 	        <td>${plan.plan_title}</td>
 	        <td>${plan.user_nickname}</td>
-	        <td>${plan.plan_date}</td>
+	        <td>
+	        <fmt:formatDate value="${plan.plan_date}" timeStyle="medium"
+										pattern="yyyy-MM-dd" />
+										</td>
 	     </tr>
 	     </c:forEach>
 	   </c:if>
@@ -278,10 +281,12 @@ hr {
 	    </tbody>
 	  </table>
 		</div>
+		</div>
 	</form>
+
 	
 <!-- 페이징 처리 -->
-<div class="text-center md-margin-bottom-30">
+<div class="text-center md-margin-bottom-50">
   <ul class="pagination">
   	<li>
   		<c:if test="${pgList.startPage > pgList.blockSize }">

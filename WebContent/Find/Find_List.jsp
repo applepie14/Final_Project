@@ -44,6 +44,7 @@
     <!-- CSS Page Style -->    
     <link rel="stylesheet" href="assets/css/pages/page_clients.css" />
 
+	<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- CSS Customization -->
     <link rel="stylesheet" href="assets/css/custom_find.css" />
     <link rel="stylesheet" href="assets/css/theme-colors/orange.css" />
@@ -65,29 +66,26 @@
             <h1>동행 찾기</h1>
         </div><!--/container-->
     </div><!--/breadcrumbs-v1-->
-    
-    <div class="breadcrumbs">
-        <div class="container">
-   	 		<ul class="pull-right breadcrumb">
-        		<li><a href="findWrite.do">동행 찾기 등록</a></li>
-   			</ul>
-        </div><!--/container-->
-    </div><!--/breadcrumbs-->
-    
-    
-    
-    <!--=== Content Part ===-->
+
+		<c:if test="${name != null && name != '관리자'}">
+			<div class="breadcrumbs">
+				<div class="container">
+					<ul class="pull-right breadcrumb">
+						<li><a href="findWrite.do">동행 찾기 등록</a></li>
+					</ul>
+				</div>
+				<!--/container-->
+			</div>
+			<!--/breadcrumbs-->
+		</c:if>
+
+
+
+		<!--=== Content Part ===-->
     <div class="container content">		
         	<div class="col-md-9 findlist">
 				
-						<!-- Clients Block-->
-						<c:if test="${pgList.count==0 }">
-							<table class="table">
-								<tr>
-									<td align="center">게시판에 저장된 글이 없습니다.</td>
-								</tr>
-							</table>
-						</c:if>
+						
 				<!--Basic Table-->
                 <table class="table">
                     <thead>
@@ -100,9 +98,18 @@
                         </tr>
                     </thead>
                     
+                    <tbody>
+                    <!-- Clients Block-->
+						<c:if test="${pgList.count==0 }">
+							<table class="table">
+								<tr>
+									<td align="center">게시판에 저장된 글이 없습니다.</td>
+								</tr>
+							</table>
+						</c:if>
 
                     <!-- 실질적으로 레코드를 출력시켜주는 부분 -->
-					<tbody>
+					
 						<c:set var="number" value="${pgList.number }" />
 						<c:forEach var="company" items="${companyList }">
 				
@@ -118,19 +125,20 @@
 								</td>
 
 								<td class="h"><!-- 글 제목 -->
-									<a href="#myModal${company.company_no }" class="trigger-btn" data-toggle="modal">
+									<a href="#myModal${company.company_no}" id="company_title" class="trigger-btn" data-toggle="modal" onclick="readCount${company.company_no}()" >
 										${company.company_title}
 									</a>
 								</td>
 
 								<td>${company.user_nickname }</td>
-								<td class="find-date"><fmt:formatDate
-										value="${company.company_date}" timeStyle="medium"
-										pattern="yyyy-MM-dd" /></td>
+								<td class="find-date">
+									<fmt:formatDate value="${company.company_date}" 
+													 timeStyle="medium"
+													 pattern="yyyy-MM-dd" />
+								</td>
 							</tr>
 						</c:forEach>
 						</tbody>
-
 
 				</table>
                 <!--End Basic Table-->
@@ -143,8 +151,8 @@
 						<option value="User_Nickname">작성자</option>
 					</select>
 					&nbsp;
-					<input type="text" class="searchtext" size="15" name="searchtext" placeholder="&nbsp;검색어를 입력하세요" >&nbsp;
-					<input class="searchbutton btn-u" type="submit" value="검색">
+					<input type="text" class="searchtext" size="15" name="searchtext" placeholder="&nbsp;검색어를 입력하세요" />&nbsp;
+					<input class="searchbutton btn-u" type="submit" value="검색" />
 				</form><p>
             
                 <!-- End Clients Block-->
@@ -193,7 +201,7 @@
     
 <c:forEach var="company" items="${companyList }">
 <!-- 글 상세보기 Modal -->
-<div id="myModal${company.company_no }" class="modal fade">
+<div id="myModal${company.company_no}" class="modal fade">
 	<div class="modal-dialog modal-login">
 		<div class="modal-content">
 		
@@ -207,186 +215,71 @@
 					<ul class="list-inline grid-boxes-news">
                         <li><span>By</span> <a href="#">${company.user_nickname }</a></li>
                         <li>|</li>
-                        <li><i class="fa fa-clock-o"></i><fmt:formatDate value="${company.company_date}" timeStyle="medium" pattern="yyyy-MM-dd" /></li>
+                        <li><i class="fa fa-clock-o"></i>&nbsp;<fmt:formatDate value="${company.company_date}" timeStyle="medium" pattern="yyyy-MM-dd" /></li>
                         <li>|</li>
-                        <li><i class="fa fa-comments-o"></i> 조회수 ${company.company_count }</li>
+                        <li class="company_count"><i class="fa fa-comments-o"></i> ${company.company_count }</li>
                     </ul>
                     
                 <c:if test="${company.user_nickname == name}" >
                     <ul class="list-inline grid-boxes-news">
-                        <li><a href="#myModal1-1" class="trigger-btn" data-toggle="modal"> 수정</a></li>
+                        <li><a href="findUpdate.do?company_no=${company.company_no}" class="trigger-btn" data-toggle="modal"> 수정</a></li>
                         <li>|</li>
-                        <li><a href="#">삭제</a></li>
+                        <li><a onclick="return confirm('정말로 삭제하시겠습니까?')" 
+							   href="findDeletePro.do?company_no=${company.company_no}">삭제</a></li>
                     </ul>
                 </c:if>
         		</div> 
 				
 				<div class="form-group">
 					<table class="modal-content-table">
-						<tr>
+						<tr class="fontsize">
 							<td class="date">여행기간</td>
 							<td width="70%"><span class="start">${company.company_startdate }</span><span class="end">${company.company_enddate }</span></td>
 						</tr>
+						
+						<tr class="fontsize">
+							<td colspan="2" height="250px" style="vertical-align:top">
+							<p style="white-space:pre-line"><c:out value="${company.company_content }"/></p>
+							</td>
+						</tr>
+						
 						<tr>
 							<td colspan="2">
-							<p>${company.company_content}</p>
+								<button class="btn-u btn-u-dark-blue btn-xs"> #
+								<c:if test="${company.company_gender eq 'M'}">남성</c:if>
+								<c:if test="${company.company_gender eq 'W'}">여성</c:if>
+								<c:if test="${company.company_gender eq 'N'}">남여동행</c:if>
+								</button>
+								<button class="btn-u btn-u-yellow btn-xs">
+									# ${company.company_theme }
+								</button>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">
-								<a href="#">#나홀로</a>
-								<a href="#">#남자</a>
-								<a href="#">#식도락</a>
-								<a href="#">#액티비티</a>
+							<td colspan="2" class="padding-top-0">
+								<c:forEach var="tag" items="${company.tags }">
+									<button class="btn-u btn-u-green btn-xs">
+										# ${tag}
+									</button> 
+								</c:forEach>
 							</td>
 						</tr>
 					</table>
 				</div>
 
+				<!--  
 				<div class="form-group">
-					<button type="button" class="btn btn-primary btn-lg btn-block login-btn"  data-toggle="modal" data-target="#myModal2">쪽지보내기</button>
+					<button type="button" class="btn btn-primary btn-lg btn-block login-btn"  data-toggle="modal" data-target="#myModal2-1">쪽지보내기</button>
 				</div>
+				-->
 			</div>
 		</div>
 	</div>
 </div>
+
+
 </c:forEach>
 
-
-
-
-
-<!-- 글 수정 Modal -->
-
-<div id="myModal1-1" class="modal fade">
-	<div class="modal-dialog modal-login">
-		<div class="modal-content">
-		
-			<div class="modal-header">
-				<h4 class="modal-title"><input type="text" class="UpdateTitle" value="여행가고싶어요~~"></input></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			
-			<div class="modal-body Update">
-
-				<div class="form-group">
-					<table class="modal-content-table">
-						<tr>
-							<td class="UpdateDate">여행기간</td>
-							<td class="UpdateDate1">
-							<span class="start">
-								<input type="text" name="start" class="Updatestart" id="start" value="2019-09-23">
-							</span>
-							~
-							<span class="finish">
-								<input type="text" name="finish" class="Updateend" id="finish" value="2019-10-12">
-							</span></td>
-							
-							
-						</div>
-						</tr>
-						<tr>
-							<td colspan="2">
-							<textarea class="UpdateContent" rows="5">제주여행사이트제주여행사이트제주여행사이트
-							제주여행사이트제주여행사이트제주여행사이트제주여행사이트
-							제주여행사이트제주여행사이트제주여행사이트제주여행사이트
-							제주여행사이트제주여행사이트제주여행사이트제주여행사이트
-							제주여행사이트제주여행사이트제주여행사이트제주여행사이트
-							제주여행사이트제주여행사이트제주여행사이트제주여행사이트
-							제주여행사이트제주여행사이트제주여행사이트제주여행사이트
-							제주여행사이트제주여행사이트제주여행사이트제주여행사이트
-							제주여행사이트제주여행사이트제주여행사이트제주여행사이트
-							</textarea>
-							</td>
-						</tr>
-					</table>
-					<table class="modal-content-table UpdateTag">
-					<tr>
-						<td class="rowspan"> 관심 태그 </td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" name="checkbox"><i></i>식도락</td>
-						<td><input type="checkbox" name="checkbox"><i></i>액티비티</td>
-						<td><input type="checkbox" name="checkbox"><i></i>휴양</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" name="checkbox"><i></i>취미</td>
-						<td><input type="checkbox" name="checkbox"><i></i>쇼핑</td>
-						<td><input type="checkbox" name="checkbox"><i></i>공연,예술</td>
-						<td><input type="checkbox" name="checkbox"><i></i>명소</td>
-					</tr>
-					<tr><td><p></td></tr>
-					<tr>
-						<td class="rowspan"> 여행 테마 </td>
-					</tr>
-					<tr>
-						<td><input type="radio" name="radio"><i class="rounded-x"></i>나홀로</td>
-						<td><input type="radio" name="radio"><i class="rounded-x"></i>가족</td>
-						<td><input type="radio" name="radio"><i class="rounded-x"></i>커플</td>
-					</tr>
-					<tr>
-						<td><input type="radio" name="radio"><i class="rounded-x"></i>단체</td>
-						<td><input type="radio" name="radio"><i class="rounded-x"></i>친구</td>
-						<td><input type="radio" name="radio"><i class="rounded-x"></i>비지니스</td>
-					</tr>
-					<tr><td><p></td></tr>
-					<tr>
-						<td class="rowspan"> 성별 </td>
-					</tr>
-					<tr>
-						<td><input type="radio" name="radio"><i class="rounded-x"></i>남자</td>
-						<td><input type="radio" name="radio"><i class="rounded-x"></i>여자</td>
-						<td><input type="radio" name="radio"><i class="rounded-x"></i>상관없음</td>
-					</tr>
-					</table>
-				</div>
-
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-lg btn-block login-btn">수정</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>     
-
-
-<!-- 쪽지 전송 Modal -->
-
-<div id="myModal2-1" class="modal fade">
-	<div class="modal-dialog modal-login">
-		<div class="modal-content">
-		
-			<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			
-			<div class="modal-body Update">
-
-				<div class="form-group">
-					<table class="modal-content-table">
-						<tr>
-							<td class="SendWriter">작성자</td>
-							<td>홍길동씨</td>
-						</tr>
-						<tr>
-							<td class="SendTitle">글제목</td>
-							<td>여행가고싶어요~~</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-							<textarea class="SendContent" rows="12"></textarea>
-							</td>
-						</tr>
-					</table>
-				</div>
-
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-lg btn-block login-btn">전송</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>     
 
 
 <%@include file="../footer.jsp" %>
@@ -405,21 +298,40 @@
 <script type="text/javascript" src="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
 <script type="text/javascript" src="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <!-- JS Customization -->
-<script type="text/javascript" src="assets/js/custom.js"></script>
-<!-- JS Page Level -->           
+	<!-- JS Page Level -->
 	<script type="text/javascript" src="assets/js/app.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/masking.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/validation.js"></script>	
+	<script type="text/javascript" src="assets/js/plugins/validation.js"></script>
+	<!-- <script type="text/javascript" src="assets/js/forms/readCount.js"></script> -->
+	
+	
+	
+	<c:forEach var="company" items="${companyList }">
+		<script>
+		function readCount${company.company_no}(){
+			$.ajax({
+				url : 'readCountPro.do?company_no=${company.company_no}',
+				type : 'get',
+				contextType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				success : function(data) {
+					//$('.company_count').html("<i class='fa fa-comments-o'></i>"+data+'asdf')
+					$('.company_count').html('<i class="fa fa-comments-o"></i>'+data)
+				}
+			})
+		}
+		</script>
+	</c:forEach>
 	<script type="text/javascript">
-    	jQuery(document).ready(function() {
-        	App.init();
-        	Masking.initMasking();
-        	Datepicker.initDatepicker();
-        	Validation.initValidation();
-        });
+		jQuery(document).ready(function() {
+			App.init();
+			Masking.initMasking();
+			Datepicker.initDatepicker();
+			Validation.initValidation();
+		});
 	</script>
-<!--[if lt IE 9]>
+	
+	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
     <script src="assets/plugins/html5shiv.js"></script>
     <script src="assets/plugins/placeholder-IE-fixes.js"></script>

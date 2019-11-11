@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Refresh" content="0;url=notice_list.do">
 <title>변경했다</title>
 </head>
 <body>

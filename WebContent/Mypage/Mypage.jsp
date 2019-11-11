@@ -16,12 +16,11 @@
 <link rel="shortcut icon" href="favicon.ico" />
 
 <!-- Web Fonts -->
-<link rel='stylesheet' type='text/css'
-	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin' />
+<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin' />
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet"
-	href="assets/plugins/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
 
 <!-- CSS Header and Footer -->
@@ -31,20 +30,14 @@
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="assets/plugins/animate.css" />
 <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css" />
-<link rel="stylesheet"
-	href="assets/plugins/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet"
-	href="assets/plugins/fancybox/source/jquery.fancybox.css" />
-<link rel="stylesheet"
-	href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" />
-<link rel="stylesheet"
-	href="assets/plugins/revolution-slider/rs-plugin/css/settings.css"
-	type="text/css" media="screen" />
-<link rel="stylesheet"
-	href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css" />
-<link rel="stylesheet"
-	href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css" />
+<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" href="assets/plugins/fancybox/source/jquery.fancybox.css" />
+<link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" />
+<link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings.css" type="text/css" media="screen" />
 <!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css" type="text/css" media="screen"><![endif]-->
+
+<!-- CSS Implementing Plugins -->
+<link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css" />
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="assets/css/custom.css" />
@@ -83,16 +76,15 @@ span {
 
 				<!-- Tab v3 -->
 				<div class="row tab-v3">
-					<div class="col-sm-3">
-						<ul class="nav nav-pills nav-stacked">
-							<li class="active"><a href="#home-2" data-toggle="tab">
-									공개일정</a></li>
-							<li><a href="#profile-2" data-toggle="tab">비공개일정</a></li>
-							<li><a href="#messages-2" data-toggle="tab">임시일정</a></li>
-							<li><a href="#settings-2" data-toggle="tab">동행찾기</a></li>
-							<li><a href="infoUpdatePro.do">회원 정보 수정</a></li>
-						</ul>
-					</div>
+				<div class="col-md-3">
+					<ul class="nav nav-pills nav-stacked">
+						<li><a href="#home-2" data-toggle="tab">일정</a></li>
+						<li><a href="#messages-2" data-toggle="tab">임시일정</a></li>
+						<li><a href="#settings-2" data-toggle="tab">동행찾기</a></li>
+						<li class="active"><a href="Mypage/reviewlist.do">리뷰</a></li>
+						<li><a href="infoUpdatePro.do">회원 정보 수정</a></li>
+					</ul>
+				</div>
 					<div class="col-sm-9">
 						<div class="tab-content">
 							<div class="tab-pane fade in active" id="home-2">
@@ -430,7 +422,8 @@ span {
 			<!-- End Content -->
 		</div>
 	</div>
-	<!--/container--> </fildset>
+	<!--/container--> 
+	</fildset>
 	</form>
 	<!--=== End Content Part ===-->
 

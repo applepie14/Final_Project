@@ -55,48 +55,54 @@ margin-bottom: 50px;}
 
 <!-- 기본 페이지 이 아래로 합치면 됨 -->
 <!-- Contacts -->
-                <form action="noticeModifyPro.do?notice_no=${article.notice_no}" method="post" id="sky-form3" class="sky-form">
-
-                    <fieldset>                  
-                      <div class="notice-container"> 
-                       <div class="headline"> <h2>공지사항 수정</h2> </div>
-                   
-                        <section>
-                            <label class="label">공지 제목</label>
-                            <label class="input">
-                                <input type="text" name="subject" id="subject" value="${article.notice_title}"/>
-                            </label>
-                        </section>
-                        
-                        <section>
-                            <label class="label">내용</label>
-                            <label class="textarea">
-                              
-                                <textarea rows="4" name="message" id="message">${article.notice_content}</textarea>
-                            </label>
-                        </section>
-                        
-                       <section>
-                            <label class="label">파일첨부</label>
-                            <label for="file" class="input input-file">
-                                <div class="button"><input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" readonly>
-                            </label>
-                        </section>                  
-                        
-                    <footer>
-                        
-                     <button type="button" class="button" onclick="window.history.back();">취소</button>
-                  <button type="submit" class="button">수정하기</button>
-                    </footer>
-            
-                     </div>
-                            </fieldset>
-                    <div class="message">
-                        <i class="rounded-x fa fa-check"></i>
-                        <p>수정되었습니다</p>
-                    </div>
-                </form>         
-                <!-- Contacts -->
+      <form action="noticeModifyPro.do?notice_no=${article.notice_no}" 
+      method="post" 
+      id="sky-form3" class="sky-form" 
+      enctype = "multipart/form-data" >
+     <input type="hidden" name="existing_file" value="${article.notice_file }" />
+          <fieldset>                  
+            <div class="notice-container"> 
+             <div class="headline"> <h2>공지사항 수정</h2> </div>
+         
+              <section>
+                  <label class="label">공지 제목</label>
+                  <label class="input">
+                      <input type="text" name="subject" id="subject" value="${article.notice_title}"/>
+                  </label>
+              </section>
+              
+              <section>
+                  <label class="label">내용</label>
+                  <label class="textarea">
+                    
+                      <textarea rows="4" name="message" id="message">${article.notice_content}</textarea>
+                  </label>
+              </section>
+              
+             <section>
+                  <label class="label">파일첨부</label>
+                  <label for="file" class="input input-file">
+                      <div class="button">
+                      <input type="file" name="file" id="file" class="file"
+	                    onchange="value2(); $('#filename').val(this.value.replace(/c:\\fakepath\\/i,''))" accept="image/*"">Browse</div>
+						   <input type="text" id="filename" class="filename" value="${article.notice_file}" readonly/>
+                  </label>
+              </section>                  
+              
+          <footer>
+              
+           <button type="button" class="button" onclick="window.history.back();">취소</button>
+        <button type="submit" class="button">수정하기</button>
+          </footer>
+  
+           </div>
+                  </fieldset>
+          <div class="message">
+              <i class="rounded-x fa fa-check"></i>
+              <p>수정되었습니다</p>
+          </div>
+      </form>         
+      <!-- Contacts -->
 
 
 <%@include file="../footer.jsp" %>
@@ -129,6 +135,10 @@ margin-bottom: 50px;}
         OwlCarousel.initOwlCarousel();
         RevolutionSlider.initRSfullWidth();
     });
+
+	function value2(){
+		$("#filename").val($("#file").val())
+	}
 </script>
 <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

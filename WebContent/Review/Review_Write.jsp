@@ -66,6 +66,9 @@
 				<!--/container-->
 				
 				<!-- General Unify Forms -->
+				<!-- <input type="file" name="review_img" id="file" class="file"
+										   onchange="value2();
+										   $('#filename').val(this.value.replace(/c:\\fakepath\\/i,'')) " />Blowse -->
 				<form method="post" enctype = "multipart/form-data" action="reviewWritePro.do" class="sky-form">
 					<fieldset>
 						<section> 
@@ -80,9 +83,11 @@
 							<label class="label">사진 등록</label> 
 							<label for="file" class="input input-file">
 								<div class="button">
-									<input type="file" name="review_img" id="file"  onclick="value()" onchange="this.parentNode.nextSibling.value = this.value" />Blowse
-								</div> 
-								<input type="text" id="filename" readonly />
+									<input type="file" name="review_img" id="file" class="file"
+										   onchange="value2(); $('#filename').val(this.value.replace(/c:\\fakepath\\/i,'')) "
+										   accept="image/*"/>Blowse
+								</div>  
+								<input type="text" id="filename" class="filename" readonly />
 							</label> 
 						</section>
 					</fieldset>
@@ -143,11 +148,12 @@
 			RevolutionSlider.initRSfullWidth();
 		});
 		
-		function value(){
-			$("#file").val() = $("#filename").val()
+		function value2(){
+			$("#filename").val($("#file").val())
 		}
+		
 	</script>
-	
+	<!-- $("#filename").val($("#file").val()) -->
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
     <script src="assets/plugins/html5shiv.js"></script>

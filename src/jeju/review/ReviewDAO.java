@@ -2,11 +2,8 @@ package jeju.review;
 
 import java.sql.*;
 import java.util.*;
-import java.sql.Date;
 
 import controller.DBConnectionMgr;
-import jeju.find.FindDTO;
-import jeju.review.ReviewDTO;
 
 public class ReviewDAO {
 
@@ -74,7 +71,7 @@ public class ReviewDAO {
 								+ "and " + search + " like '%" + searchtext + "%' ";
 					}
 				}
-				System.out.println("getCompanySearchCount 검색sql => "+sql);
+				System.out.println("getReviewSearchCount 검색sql => "+sql);
 				//-------------------------------
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
@@ -156,7 +153,7 @@ public class ReviewDAO {
 								+ "limit ?,?";
 					}
 				}
-				System.out.println("getCompanyArticles()의 sql => "+sql);
+				System.out.println("getReviewArticles()의 sql => "+sql);
 				//----------------------------------
 				// 1, 10 --> 1번째 레코드 번호부터 10개씩 끊어서 보여달라는 구문
 				pstmt = con.prepareStatement(sql);
@@ -325,12 +322,13 @@ public class ReviewDAO {
 		int update = 0; // 게시물의 수정 성공 유무
 		try {
 			con = pool.getConnection();
-			sql = "update Review set Review_Title=?, Review_Place=?, Review_Content=? " + "where Review_No=?";
+			sql = "update Review set Review_Title=?, Review_Place=?, Review_Content=?, Review_Img=? " + "where Review_No=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, review.getReview_title());
 			pstmt.setString(2, review.getReview_place());
 			pstmt.setString(3, review.getReview_content());
-			pstmt.setInt(4, review.getReview_no());
+			pstmt.setString(4, review.getReview_img());
+			pstmt.setInt(5, review.getReview_no());
 
 			update = pstmt.executeUpdate();
 			System.out.println("리뷰게시판 글수정 성공 유무(updateReview) => " + update);
@@ -353,9 +351,9 @@ public class ReviewDAO {
 			pstmt.setInt(1, review_no);
 
 			delete = pstmt.executeUpdate();
-			System.out.println("리뷰게시판 글삭제 성공 유무(deleteRevuew) => " + delete);
+			System.out.println("리뷰게시판 글삭제 성공 유무(deleteReview) => " + delete);
 		} catch (Exception e) {
-
+			System.out.println("deleteReview() 에러 => " + e);
 		} finally {
 			pool.freeConnection(con, pstmt);
 		}

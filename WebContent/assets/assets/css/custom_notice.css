@@ -1,0 +1,89 @@
+/* Add here all your css styles (customizations) */
+
+/* 공지사항 css */
+th.notice-num,
+th.notice-date,
+td.find-num,
+td:nth-child(3) {
+	text-align: center;
+}
+
+
+.notice-container {
+	width: 800px;
+	margin: 50px auto;
+}
+
+
+.clients-page {
+	margin-bottom: 5px;
+	margin-top: 5px;
+	border-bottom: 1px solid #eee;
+	border-top: 1px solid #eee;
+}
+
+.sky-form fieldset {
+	display: block;	
+	padding: 10px 50px 5px;
+	border: none;
+	background: rgba(255,255,255,.9);
+}
+
+.detail-p {
+margin-top:80px;
+margin-bottom:170px;
+}
+
+.breadcrumbs-v1-detail {
+    padding: 100px 0;
+    position: relative;
+    background: url(https://i.ibb.co/j8YLLs8/1440578674938-jeju-island-451169-1920.jpg) center no-repeat;
+    background-size: cover;
+}
+
+.breadcrumbs-v1:after {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: " ";
+    position: absolute;
+  
+}
+
+.breadcrumbs-v1-list{
+	padding: 100px 0;
+    position: relative;
+    background: url(https://i.ibb.co/BgMzYw7/1437382696311-Kakao-Talk-20150720-160434875.png) center no-repeat;
+    background-size: cover;
+}
+
+.breadcrumbs-v1-list.breadcrumbs-v1-list2 {
+    background: url(https://i.ibb.co/JsbdBP6/title2.jpg) center no-repeat;
+}
+
+
+.breadcrumbs-v1-MyPage{
+	 padding: 100px 0;
+    position: relative;
+    background: url(https://i.ibb.co/9wX8XMJ/image.jpg) center no-repeat;
+    background-size: cover;
+}
+
+
+@media (max-width: 414px) {
+	.sky-form fieldset{
+		padding: 10px 10px 5px;
+	}
+}
+
+@media (max-width: 768px) {
+	.notice-container {
+		width: 100%;
+	}
+}
+
+
+
+
+
