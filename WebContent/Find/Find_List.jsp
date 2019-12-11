@@ -125,7 +125,12 @@
 								</td>
 
 								<td class="h"><!-- 글 제목 -->
-									<a href="#myModal${company.company_no}" id="company_title" class="trigger-btn" data-toggle="modal" onclick="readCount${company.company_no}()" >
+									<a	href="readCountPro.do?company_no=${company.company_no}"
+										data-target="#myModal" 
+										id="company_title" 
+										class="trigger-btn" 
+										data-toggle="modal" 
+										onclick="readCount(${company.company_no})" >
 										${company.company_title}
 									</a>
 								</td>
@@ -201,79 +206,11 @@
     
 <c:forEach var="company" items="${companyList }">
 <!-- 글 상세보기 Modal -->
-<div id="myModal${company.company_no}" class="modal fade">
+<div id="myModal" class="modal fade">
 	<div class="modal-dialog modal-login">
 		<div class="modal-content">
-		
-			<div class="modal-header">
-				<h4 class="modal-title">${company.company_title}</h4>	
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			
-			<div class="modal-body">
-				<div class="modal-info">
-					<ul class="list-inline grid-boxes-news">
-                        <li><span>By</span> <a href="#">${company.user_nickname }</a></li>
-                        <li>|</li>
-                        <li><i class="fa fa-clock-o"></i>&nbsp;<fmt:formatDate value="${company.company_date}" timeStyle="medium" pattern="yyyy-MM-dd" /></li>
-                        <li>|</li>
-                        <li class="company_count"><i class="fa fa-comments-o"></i> ${company.company_count }</li>
-                    </ul>
-                    
-                <c:if test="${company.user_nickname == name}" >
-                    <ul class="list-inline grid-boxes-news">
-                        <li><a href="findUpdate.do?company_no=${company.company_no}" class="trigger-btn" data-toggle="modal"> 수정</a></li>
-                        <li>|</li>
-                        <li><a onclick="return confirm('정말로 삭제하시겠습니까?')" 
-							   href="findDeletePro.do?company_no=${company.company_no}">삭제</a></li>
-                    </ul>
-                </c:if>
-        		</div> 
-				
-				<div class="form-group">
-					<table class="modal-content-table">
-						<tr class="fontsize">
-							<td class="date">여행기간</td>
-							<td width="70%"><span class="start">${company.company_startdate }</span><span class="end">${company.company_enddate }</span></td>
-						</tr>
-						
-						<tr class="fontsize">
-							<td colspan="2" height="250px" style="vertical-align:top">
-							<p style="white-space:pre-line"><c:out value="${company.company_content }"/></p>
-							</td>
-						</tr>
-						
-						<tr>
-							<td colspan="2">
-								<button class="btn-u btn-u-dark-blue btn-xs"> #
-								<c:if test="${company.company_gender eq 'M'}">남성</c:if>
-								<c:if test="${company.company_gender eq 'W'}">여성</c:if>
-								<c:if test="${company.company_gender eq 'N'}">남여동행</c:if>
-								</button>
-								<button class="btn-u btn-u-yellow btn-xs">
-									# ${company.company_theme }
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2" class="padding-top-0">
-								<c:forEach var="tag" items="${company.tags }">
-									<button class="btn-u btn-u-green btn-xs">
-										# ${tag}
-									</button> 
-								</c:forEach>
-							</td>
-						</tr>
-					</table>
-				</div>
 
-				<!--  
-				<div class="form-group">
-					<button type="button" class="btn btn-primary btn-lg btn-block login-btn"  data-toggle="modal" data-target="#myModal2-1">쪽지보내기</button>
-				</div>
-				-->
-			</div>
-		</div>
+		 </div>
 	</div>
 </div>
 
@@ -309,17 +246,6 @@
 	
 	<c:forEach var="company" items="${companyList }">
 		<script>
-		function readCount${company.company_no}(){
-			$.ajax({
-				url : 'readCountPro.do?company_no=${company.company_no}',
-				type : 'get',
-				contextType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				success : function(data) {
-					//$('.company_count').html("<i class='fa fa-comments-o'></i>"+data+'asdf')
-					$('.company_count').html('<i class="fa fa-comments-o"></i>'+data)
-				}
-			})
-		}
 		</script>
 	</c:forEach>
 	<script type="text/javascript">
@@ -329,6 +255,17 @@
 			Datepicker.initDatepicker();
 			Validation.initValidation();
 		});
+		function readCount(num){
+			$.ajax({
+				url : 'readCountPro.do?company_no='+num,
+				type : 'post',
+				contextType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				success : function(data) {
+					//$('.company_count').html("<i class='fa fa-comments-o'></i>"+data+'asdf')
+					$('.modal-content').html(data);
+				}
+			})
+		}
 	</script>
 	
 	<!--[if lt IE 9]>

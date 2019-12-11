@@ -1,5 +1,7 @@
 package action;
 
+import java.util.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,6 +26,13 @@ public class ReadCountAction implements CommandAction {
 	
 		FindDTO company = dao.readCount(company_no);
 
+		//============================================
+		dto = dao.getArticle(company_no);
+		dto.setTags((ArrayList<String>) dao.getTagCompany(company_no));
+
+		request.setAttribute("tags", dto.getTags());
+		//============================================
+		
 		request.setAttribute("update", update);
 		request.setAttribute("company", company);
 		

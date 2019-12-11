@@ -5,6 +5,7 @@ import java.util.*;
 
 import controller.DBConnectionMgr;
 import jeju.find.FindDTO;
+import jeju.notice.NoticeDTO;
 
 public class FindDAO {
 
@@ -445,6 +446,51 @@ public class FindDAO {
 		}
 		
 	}
+	
+
+	
+	private FindDTO makeNoticeFromResult() throws Exception{
+		FindDTO company=new FindDTO();
+		company.setCompany_no(rs.getInt("company_no"));
+		company.setUser_email(rs.getString("user_email"));
+		company.setCompany_title(rs.getString("company_title"));
+		company.setCompany_content(rs.getString("company_content"));
+		company.setCompany_count(rs.getInt("company_count"));
+		company.setCompany_startdate(rs.getString("company_startdate"));
+		company.setCompany_enddate(rs.getString("company_enddate"));
+		company.setCompany_gender(rs.getString("company_gender"));
+		company.setCompany_theme(rs.getString("company_theme"));
+		company.setCompany_date(rs.getDate("company_date"));
+		company.setUser_nickname(rs.getString("user_nickname"));
+		
+		return company ;
+	}
+	
+	public FindDTO getArticle(int company_no) {
+		
+		FindDTO company=null;
+		
+		try {			
+			con=pool.getConnection();			
+			sql="select *, user_nickname from Company,user "
+			 	+ "where user.user_email=Company.user_email "
+			 	+ "And company_no=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, company_no);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {//레코드가 존재한다면
+				company=makeNoticeFromResult();
+			}
+		}catch(Exception e) {
+			System.out.println("getArticle()메서드 에러유발"+e);
+		}finally {
+			pool.freeConnection(con, pstmt,rs);
+		}
+		return company;
+	}
+	
+	
 	
 	// 글 수정
 	// 1) 수정할 데이터를 찾을 메서드 필요 -> select * from board
